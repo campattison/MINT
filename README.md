@@ -88,7 +88,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Research Hub: AI Ethics and Philosophy</h1>
+        <h1>Research Hub: Normative Philosophy of Computing</h1>
         <div class="section" id="papers-section">
             <h2>Recent Papers</h2>
             <ul id="papers-list"></ul>
