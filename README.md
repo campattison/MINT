@@ -110,35 +110,35 @@
                     title: "Beneficent Intelligence: A Capability Approach to Modeling Benefit, Assistance, and Associated Moral Failures Through AI Systems",
                     authors: "London, A.J., Heidari, H.",
                     journal: "Minds & Machines",
-                    date: "2024-9-28",
+                    date: "2024-09-28",
                     url: "https://doi.org/10.1007/s11023-024-09696-8"
                 },
                 {
                     title: "The AI Design Regress",
                     authors: "Pamela Robinson",
                     journal: "Philosophical Studies",
-                    date: "2024-7-27",
+                    date: "2024-07-27",
                     url: "https://link.springer.com/article/10.1007/s11098-024-02176-w"
                 },
                 {
                     title: "Intention reconsideration in artificial agents: a structured account",
                     authors: "Fabrizio Cariani",
                     journal: "Philosophical Studies",
-                    date: "2024-6-1",
+                    date: "2024-06-01",
                     url: "https://link.springer.com/article/10.1007/s11098-024-02172-0"
                 },
                 {
                     title: "Group Prioritarianism: Why AI Should not Replace Humanity",
                     authors: "Frank Hong",
                     journal: "Philosophical Studies",
-                    date: "2024-7-13",
-                    url: "https://link.springer.com/article/10.1007/s11098-024-02226-3"
+                    date: "2024-07-13",
+                    url: "https://link.springer.com/article/10.1007/s11098-024-02189-5"
                 },
                 {
                     title: "The selfish machine? On the power and limitation of natural selection to understand the development of advanced AI",
                     authors: "Maarten Boudry & Simon Friederich",
                     journal: "Philosophical Studies",
-                    date: "2024-9-24",
+                    date: "2024-09-24",
                     url: "https://link.springer.com/article/10.1007/s11098-024-02226-3"
                 }
             ],
@@ -150,7 +150,7 @@
                 },
                 {
                     title: "Call for Papers on Social Cognition and Agency",
-                    deadline: "2024-9-24",
+                    deadline: "2024-09-24",
                     url: "https://philevents.org/event/show/126422"
                 },
                 {
