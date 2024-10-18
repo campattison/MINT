@@ -110,7 +110,7 @@
                     title: "Beneficent Intelligence: A Capability Approach to Modeling Benefit, Assistance, and Associated Moral Failures Through AI Systems",
                     authors: "London, A.J., Heidari, H.",
                     journal: "Minds & Machines",
-                    date: "2024-09-28",
+                    date: "2024-09-01",
                     url: "https://doi.org/10.1007/s11023-024-09696-8"
                 },
                 {
@@ -140,6 +140,27 @@
                     journal: "Philosophical Studies",
                     date: "2024-09-24",
                     url: "https://link.springer.com/article/10.1007/s11098-024-02226-3"
+                },
+                {
+                    title: "Controllable Safety Alignment: Inference-Time Adaptation to Diverse Safety Requirements",
+                    authors: "Jingyu Zhang, Ahmed Elgohary, Ahmed Magooda, Daniel Khashabi, Benjamin Van Durme",
+                    journal: "arXiv",
+                    date: "2024-10-11",
+                    url: "https://arxiv.org/abs/2410.08968"
+                },
+                {
+                    title: "Jailbreaking LLM-Controlled Robots",
+                    authors: "Alexander Robey, Zachary Ravichandran, Vijay Kumar, Hamed Hassani, George J. Pappas",
+                    journal: "arXiv",
+                    date: "2024-10-17",
+                    url: "https://arxiv.org/abs/2410.13691"
+                },
+                {
+                    title: "Moral Alignment for LLM Agents",
+                    authors: "Elizaveta Tennant, Stephen Hailes, Mirco Musolesi",
+                    journal: "arXiv",
+                    date: "2024-10-02",
+                    url: "https://arxiv.org/abs/2410.01639"
                 }
             ],
             cfps: [
@@ -168,7 +189,7 @@
                 },
                 {
                     title: "TeXne Conference",
-                    date: "2025-2-01",
+                    date: "2025-02-01",
                     location: "MIT",
                     url: "https://philevents.org/event/show/126054"
                 }
