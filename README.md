@@ -196,11 +196,11 @@
             ]
         };
 
-        function isWithinTenMonths(dateString) {
+        function isWithinSixMonths(dateString) {
             const itemDate = new Date(dateString);
             const currentDate = new Date();
-            const tenMonthsAgo = new Date(currentDate.setMonth(currentDate.getMonth() - 10));
-            return itemDate >= tenMonthsAgo;
+            const sixMonthsAgo = new Date(currentDate.setMonth(currentDate.getMonth() - 6));
+            return itemDate >= sixMonthsAgo;
         }
 
         function isDeadlineFuture(dateString) {
@@ -257,7 +257,7 @@
             const sortedCFPs = sortByDateAscending(data.cfps);
             const sortedConferences = sortByDateAscending(data.conferences);
 
-            updateList(sortedPapers, 'papers-list', isWithinTenMonths, formatPaper);
+            updateList(sortedPapers, 'papers-list', isWithinSixMonths, formatPaper);
             updateList(sortedCFPs, 'cfps-list', isDeadlineFuture, formatCFP);
             updateList(sortedConferences, 'conferences-list', isConferenceFuture, formatConference);
         }
