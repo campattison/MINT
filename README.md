@@ -111,14 +111,14 @@
                     title: "Beneficent Intelligence: A Capability Approach to Modeling Benefit, Assistance, and Associated Moral Failures Through AI Systems",
                     authors: "London, A.J., Heidari, H.",
                     journal: "Minds & Machines",
-                    date: "2024-10-18",
+                    date: "2024-9-28",
                     url: "https://doi.org/10.1007/s11023-024-09696-8"
                 },
                 {
                     title: "The AI Design Regress",
                     authors: "Pamela Robinson",
                     journal: "Philosophical Studies",
-                    date: "2024-9-28",
+                    date: "2024-7-27",
                     url: "https://link.springer.com/article/10.1007/s11098-024-02176-w"
                 },
                 {
