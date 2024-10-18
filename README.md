@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -224,7 +223,7 @@
         }
 
         function updateLists() {
-            updateList(data.papers, 'papers-list', isWithinSixMonths, formatPaper);
+            updateList(data.papers, 'papers-list', isWithinTenMonths, formatPaper);
             updateList(data.cfps, 'cfps-list', isDeadlineFuture, formatCFP);
             updateList(data.conferences, 'conferences-list', isConferenceFuture, formatConference);
         }
