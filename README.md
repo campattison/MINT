@@ -176,11 +176,11 @@
             ]
         };
 
-        function isWithinSixMonths(dateString) {
+        function isWithinTenMonths(dateString) {
             const itemDate = new Date(dateString);
             const currentDate = new Date();
-            const sixMonthsAgo = new Date(currentDate.setMonth(currentDate.getMonth() - 6));
-            return itemDate >= sixMonthsAgo;
+            const tenMonthsAgo = new Date(currentDate.setMonth(currentDate.getMonth() - 10));
+            return itemDate >= tenMonthsAgo;
         }
 
         function isDeadlineFuture(dateString) {
