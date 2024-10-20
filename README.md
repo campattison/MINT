@@ -115,16 +115,16 @@
                 },
                 {
                     title: "Sabotage Evaluations for Frontier Models",
-                    authors: "Joe Benton, Misha Wagner, Eric Christiansen, Cem    Anil, Ethan Perez, Jai Srivastav, Esin Durmus, et al.",
+                    authors: "Joe Benton, Misha Wagner, Eric Christiansen, Cem Anil, Ethan Perez, Jai Srivastav, Esin Durmus, et al.",
                     journal: "Anthropic Research",
                     date: "2024-10-18",
                     url: "https://www.anthropic.com/research/sabotage-evaluations"
                 },
                 {
-                    title: "Megastudy testing 25 treatments to reduce antidemocratic attitudes and partisan animosity",
+                    title: "Megastudy Testing 25 Treatments to Reduce Antidemocratic Attitudes and Partisan Animosity",
                     authors: "Jan G. Voelkel et al.",
                     journal: "Science",
-                    date: "2024-10-18",
+                    date: "2024-10-20",
                     url: "https://www.science.org/doi/10.1126/science.adh4764"
                 },
                 {
@@ -135,7 +135,7 @@
                     url: "https://link.springer.com/article/10.1007/s11098-024-02176-w"
                 },
                 {
-                    title: "Intention reconsideration in artificial agents: a structured account",
+                    title: "Intention Reconsideration in Artificial Agents: A Structured Account",
                     authors: "Fabrizio Cariani",
                     journal: "Philosophical Studies",
                     date: "2024-06-01",
@@ -149,7 +149,7 @@
                     url: "https://link.springer.com/article/10.1007/s11098-024-02189-5"
                 },
                 {
-                    title: "The selfish machine? On the power and limitation of natural selection to understand the development of advanced AI",
+                    title: "The Selfish Machine? On the Power and Limitation of Natural Selection to Understand the Development of Advanced AI",
                     authors: "Maarten Boudry & Simon Friederich",
                     journal: "Philosophical Studies",
                     date: "2024-09-24",
@@ -175,35 +175,28 @@
                     journal: "arXiv",
                     date: "2024-10-02",
                     url: "https://arxiv.org/abs/2410.01639"
+                },
+                {
+                    title: "Looking Inward: Language Models Can Learn About Themselves by Introspection",
+                    authors: "Felix J. Binder, James Chua, Tomek Korbak, Henry Sleight, John Hughes, Robert Long, Ethan Perez, Miles Turpin, Owain Evans",
+                    journal: "arXiv",
+                    date: "2024-10-17",
+                    url: "http://arxiv.org/abs/2410.13787"
+                },
+                {
+                    title: "Autoregressive Large Language Models Are Computationally Universal",
+                    authors: "Dale Schuurmans, Hanjun Dai, Francesco Zanini",
+                    journal: "arXiv",
+                    date: "2024-10-04",
+                    url: "http://arxiv.org/abs/2410.03170"
+                },
+                {
+                    title: "Persistent Pre-Training Poisoning of LLMs",
+                    authors: "Yiming Zhang, Javier Rando, Ivan Evtimov, Jianfeng Chi, Eric Michael Smith, Nicholas Carlini, Florian Tramèr, Daphne Ippolito",
+                    journal: "arXiv",
+                    date: "2024-10-17",
+                    url: "http://arxiv.org/abs/2410.13722"
                 }
-                    {
-        title: "Looking Inward: Language Models Can Learn About Themselves by Introspection",
-        authors: "Felix J. Binder, James Chua, Tomek Korbak, Henry Sleight, John Hughes, Robert Long, Ethan Perez, Miles Turpin, Owain Evans",
-        journal: "arXiv",
-        date: "2024-10-17",
-        url: "http://arxiv.org/abs/2410.13787"
-    },
-    {
-        title: "Megastudy Testing 25 Treatments to Reduce Antidemocratic Attitudes and Partisan Animosity",
-        authors: "N/A",
-        journal: "Science",
-        date: "2024-10-20",
-        url: "https://doi.org/10.1126/science.adh4764"
-    },
-    {
-        title: "Autoregressive Large Language Models Are Computationally Universal",
-        authors: "Dale Schuurmans, Hanjun Dai, Francesco Zanini",
-        journal: "arXiv",
-        date: "2024-10-04",
-        url: "http://arxiv.org/abs/2410.03170"
-    },
-    {
-        title: "Persistent Pre-Training Poisoning of LLMs",
-        authors: "Yiming Zhang, Javier Rando, Ivan Evtimov, Jianfeng Chi, Eric Michael Smith, Nicholas Carlini, Florian Tramèr, Daphne Ippolito",
-        journal: "arXiv",
-        date: "2024-10-17",
-        url: "http://arxiv.org/abs/2410.13722"
-    }
             ],
             cfps: [
                 {
@@ -220,13 +213,12 @@
                     title: "TeXne Conference Call for Papers",
                     deadline: "2024-11-01",
                     url: "https://philevents.org/event/show/126054"
-                }
-
+                },
                 {
-    title: "Symposium 2025: Aristotle in the Era of A.I. - Call for Participation",
-    deadline: "2025-01-07",
-    url: "mailto:aristotle.ai@academyofathens.gr"
-}
+                    title: "Symposium 2025: Aristotle in the Era of A.I. - Call for Participation",
+                    deadline: "2025-01-07",
+                    url: "mailto:aristotle.ai@academyofathens.gr"
+                }
             ],
             conferences: [
                 {
@@ -240,14 +232,13 @@
                     date: "2025-02-01",
                     location: "MIT",
                     url: "https://philevents.org/event/show/126054"
-                }
-
+                },
                 {
-    title: "Symposium 2025: Aristotle in the Era of A.I.",
-    date: "2025-07-10",
-    location: "Academy of Athens, Greece",
-    url: "mailto:info@academyofathens.gr"
-}
+                    title: "Symposium 2025: Aristotle in the Era of A.I.",
+                    date: "2025-07-10",
+                    location: "Academy of Athens, Greece",
+                    url: "mailto:info@academyofathens.gr"
+                }
             ]
         };
 
