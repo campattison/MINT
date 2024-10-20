@@ -221,6 +221,12 @@
                     deadline: "2024-11-01",
                     url: "https://philevents.org/event/show/126054"
                 }
+
+                {
+    title: "Symposium 2025: Aristotle in the Era of A.I. - Call for Participation",
+    deadline: "2025-01-07",
+    url: "mailto:aristotle.ai@academyofathens.gr"
+}
             ],
             conferences: [
                 {
@@ -235,6 +241,13 @@
                     location: "MIT",
                     url: "https://philevents.org/event/show/126054"
                 }
+
+                {
+    title: "Symposium 2025: Aristotle in the Era of A.I.",
+    date: "2025-07-10",
+    location: "Academy of Athens, Greece",
+    url: "mailto:info@academyofathens.gr"
+}
             ]
         };
 
