@@ -205,8 +205,8 @@
                     url: "https://www.oxford-aiethics.ox.ac.uk/oxford-berlin-colloquium-2025-call-papers"
                 },
                 {
-                    title: "ACM FAccT 2025 (Athens, Greece)
-                    deadline: "2025-01-15"
+                    title: "ACM FAccT 2025 (Athens, Greece)",
+                    deadline: "2025-01-15",
                     url:    "https://facctconference.org/2025/#:~:text=FAccT%202025,welcome%20your%20contributions%20and%20insights."
                 },
                 {
