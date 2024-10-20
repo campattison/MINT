@@ -114,6 +114,20 @@
                     url: "https://doi.org/10.1007/s11023-024-09696-8"
                 },
                 {
+                    title: "Sabotage Evaluations for Frontier Models",
+                    authors: "Joe Benton, Misha Wagner, Eric Christiansen, Cem    Anil, Ethan Perez, Jai Srivastav, Esin Durmus, et al.",
+                    journal: "Anthropic Research",
+                    date: "2024-10-18",
+                    url: "https://www.anthropic.com/research/sabotage-evaluations"
+                },
+                {
+                    title: "Megastudy testing 25 treatments to reduce antidemocratic attitudes and partisan animosity",
+                    authors: "Jan G. Voelkel et al.",
+                    journal: "Science",
+                    date: "2024-10-18",
+                    url: "https://www.science.org/doi/10.1126/science.adh4764"
+                },
+                {
                     title: "The AI Design Regress",
                     authors: "Pamela Robinson",
                     journal: "Philosophical Studies",
@@ -162,6 +176,34 @@
                     date: "2024-10-02",
                     url: "https://arxiv.org/abs/2410.01639"
                 }
+                    {
+        title: "Looking Inward: Language Models Can Learn About Themselves by Introspection",
+        authors: "Felix J. Binder, James Chua, Tomek Korbak, Henry Sleight, John Hughes, Robert Long, Ethan Perez, Miles Turpin, Owain Evans",
+        journal: "arXiv",
+        date: "2024-10-17",
+        url: "http://arxiv.org/abs/2410.13787"
+    },
+    {
+        title: "Megastudy Testing 25 Treatments to Reduce Antidemocratic Attitudes and Partisan Animosity",
+        authors: "N/A",
+        journal: "Science",
+        date: "2024-10-20",
+        url: "https://doi.org/10.1126/science.adh4764"
+    },
+    {
+        title: "Autoregressive Large Language Models Are Computationally Universal",
+        authors: "Dale Schuurmans, Hanjun Dai, Francesco Zanini",
+        journal: "arXiv",
+        date: "2024-10-04",
+        url: "http://arxiv.org/abs/2410.03170"
+    },
+    {
+        title: "Persistent Pre-Training Poisoning of LLMs",
+        authors: "Yiming Zhang, Javier Rando, Ivan Evtimov, Jianfeng Chi, Eric Michael Smith, Nicholas Carlini, Florian Tramèr, Daphne Ippolito",
+        journal: "arXiv",
+        date: "2024-10-17",
+        url: "http://arxiv.org/abs/2410.13722"
+    }
             ],
             cfps: [
                 {
