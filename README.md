@@ -107,6 +107,13 @@
         const data = {
             papers: [
                 {
+                    title: "GSM-Symbolic: Understanding the Limitations of Mathematical Reasoning in Large Language Models",
+                    authors: "Iman Mirzadeh, Keivan Alizadeh, Hooman Shahrokhi, Oncel Tuzel, Samy Bengio, Mehrdad Farajtabar",
+                    journal: "Apple Research",
+                    date: "2024-10-07",
+                    url: "https://arxiv.org/abs/2410.05229"
+                },
+                {
                     title: "Beneficent Intelligence: A Capability Approach to Modeling Benefit, Assistance, and Associated Moral Failures Through AI Systems",
                     authors: "London, A.J., Heidari, H.",
                     journal: "Minds & Machines",
