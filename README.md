@@ -507,8 +507,8 @@
                     date: "2024-12-05",
                     location: "Online",
                     url: "https://philevents.org/event/show/125678",
-                    lat: null, // Online event, no specific location
-                    lng: null
+                    lat: -75, // Online event, no specific location
+                    lng: 0
                 }
             ]
         };
@@ -618,29 +618,41 @@
                     return selectedMonths.includes('all') || selectedMonths.includes(date.getMonth().toString());
                 })
                 .map(conf => {
-                    let { lat, lng } = conf;
-                    if ((lat === 0 && lng === 0) || lat === null || lng === null) {
-                        ({ lat, lng } = getRandomAntarcticaCoordinates());
+                    if (!conf.lat || !conf.lng) {
+                        return null; // Skip conferences without coordinates
                     }
-                    const isAntarctica = lat < -60;
+                    const date = new Date(conf.date);
+                    const isDecember = date.getMonth() === 11;
+                    const isSummer = [5, 6, 7].includes(date.getMonth()); // June, July, August
+
                     return {
-                        lat,
-                        lng,
+                        lat: conf.lat,
+                        lng: conf.lng,
                         size: 0.5,
-                        color: isAntarctica ? '#FF69B4' : (selectedMonths.includes('all') ? '#FFD700' : '#3498db'),
+                        color: isDecember ? '#C41E3A' : // Christmas red for December
+                               (isSummer ? '#FFD700' : // Bright green for summer
+                               (selectedMonths.includes('all') ? '#FFD700' : '#3498db')),
                         label: `
                             <div style="
                                 text-align: center; 
-                                background-color: ${isAntarctica ? 'rgba(255,105,180,0.9)' : (selectedMonths.includes('all') ? 'rgba(255,223,186,0.9)' : 'rgba(255,255,255,0.9)')}; 
+                                background-color: ${isDecember ? 'rgba(196,30,58,0.9)' : 
+                                            (isSummer ? 'rgba(255,215,0,0.9)' : 
+                                            (selectedMonths.includes('all') ? 'rgba(255,215,0,0.9)' : 'rgba(255,255,255,0.9)'))}; 
                                 padding: 10px; 
                                 border-radius: 5px;
                                 box-shadow: 0 2px 5px rgba(0,0,0,0.2);
                                 font-family: Arial, sans-serif;
                             ">
-                                <strong style="color: ${isAntarctica ? '#8B008B' : (selectedMonths.includes('all') ? '#8B4513' : '#2c3e50')}; font-size: 14px;">${conf.title}</strong><br>
-                                <span style="color: ${isAntarctica ? '#4B0082' : (selectedMonths.includes('all') ? '#CD853F' : '#34495e')}; font-size: 12px;">${formatDate(conf.date)}<br>${conf.location}</span><br>
+                                <strong style="color: ${isDecember ? '#FFFFFF' : 
+                                                (isSummer ? '#8B4513' : 
+                                                (selectedMonths.includes('all') ? '#8B4513' : '#2c3e50'))}; font-size: 14px;">${conf.title}</strong><br>
+                                <span style="color: ${isDecember ? '#F0F0F0' : 
+                                             (isSummer ? '#CD853F' : 
+                                             (selectedMonths.includes('all') ? '#CD853F' : '#34495e'))}; font-size: 12px;">${formatDate(conf.date)}<br>${conf.location}</span><br>
                                 <a href="${conf.url}" target="_blank" style="
-                                    color: ${isAntarctica ? '#0000FF' : (selectedMonths.includes('all') ? '#0000FF' : '#3498db')}; 
+                                    color: ${isDecember ? '#90EE90' : 
+                                            (isSummer ? '#0000FF' : 
+                                            (selectedMonths.includes('all') ? '#0000FF' : '#3498db'))}; 
                                     text-decoration: none; 
                                     font-weight: bold;
                                     font-size: 12px;
@@ -648,51 +660,14 @@
                             </div>
                         `,
                     };
-                });
+                })
+                .filter(marker => marker !== null); // Remove null markers
 
             globe.pointsData(markers)
                 .pointAltitude(0.01)
                 .pointColor('color')
                 .pointLabel('label')
-                .pointRadius('size')
-                .onPointHover(point => {
-                    if (point) {
-                        globe.controls().autoRotate = false;
-                    } else {
-                        globe.controls().autoRotate = false; // Keep it false to prevent auto-rotation
-                    }
-                })
-                .onPointClick(point => {
-                    if (point) {
-                        const conf = data.conferences.find(c => c.lat === point.lat && c.lng === point.lng);
-                        if (conf) {
-                            window.open(conf.url, '_blank');
-                        }
-                    }
-                });
-
-            // Add 3D arrows
-            const arrowData = markers.map(marker => ({
-                startLat: marker.lat,
-                startLng: marker.lng,
-                endLat: marker.lat,
-                endLng: marker.lng,
-                color: marker.color
-            }));
-
-            globe.arcsData(arrowData)
-                .arcColor('color')
-                .arcAltitude(0.2)
-                .arcStroke(0.5)
-                .arcDashLength(0.4)
-                .arcDashGap(0.2)
-                .arcDashAnimateTime(1500);
-
-            if (selectedMonths.includes('all')) {
-                globe.atmosphereColor('#FFB6C1');
-            } else {
-                globe.atmosphereColor('lightskyblue');
-            }
+                .pointRadius('size');
         }
 
         function updateLists() {
@@ -741,13 +716,6 @@
                 spread: 120,
                 startVelocity: 45,
             });
-        }
-
-        function getRandomAntarcticaCoordinates() {
-            // Antarctica is roughly between -60 and -90 latitude, and all longitudes
-            const lat = Math.random() * (-60 - (-90)) + (-90);
-            const lng = Math.random() * 360 - 180;
-            return { lat, lng };
         }
 
         // Initial update
