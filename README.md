@@ -563,7 +563,7 @@
                 .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
                 .width(width)
                 .height(height)
-                .showAtmosphere(true)
+                .showAtmosphere(false)
                 .atmosphereColor('lightskyblue')
                 .atmosphereAltitude(0.1)
                 (globeContainer);
