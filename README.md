@@ -440,7 +440,7 @@
                 },
                 {
                     title: "AISoLA, Conference Track Responsible and Trusted AI: An Interdisciplinary Perspective",
-                    date: "2024-10-30 - 2024-11-03",
+                    date: "2024-10-30",
                     location: "Aldemar Knossos Royal, Crete, Greece",
                     url: "https://2024-isola.isola-conference.org/",
                     lat: 35.3253,
