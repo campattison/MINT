@@ -424,7 +424,13 @@
                 .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
                 .width(width)
                 .height(height)
+                .showAtmosphere(true)
+                .atmosphereColor('lightskyblue')
+                .atmosphereAltitude(0.1)
                 (globeContainer);
+
+            // Stop auto-rotation
+            globe.controls().autoRotate = false;
 
             updateMarkers();
 
@@ -438,6 +444,12 @@
                     globe.globeImageUrl('//unpkg.com/three-globe/example/img/earth-blue-marble.jpg');
                 }
             });
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const options = { month: 'long', day: 'numeric', year: 'numeric' };
+            return date.toLocaleDateString('en-US', options);
         }
 
         function updateMarkers() {
@@ -454,7 +466,14 @@
                     lng: conf.lng,
                     size: 0.5,
                     color: showSummer ? '#FFD700' : '#3498db',
-                    label: `${conf.title}\n${conf.date}\n${conf.location}`,
+                    label: `
+                        <div style="text-align: center; background-color: rgba(255,255,255,0.8); padding: 10px; border-radius: 5px;">
+                            <strong>${conf.title}</strong><br>
+                            ${formatDate(conf.date)}<br>
+                            ${conf.location}<br>
+                            <a href="${conf.url}" target="_blank" style="color: #3498db;">More information</a>
+                        </div>
+                    `,
                 }));
 
             globe.pointsData(markers)
@@ -466,18 +485,40 @@
                     if (point) {
                         globe.controls().autoRotate = false;
                     } else {
-                        globe.controls().autoRotate = true;
+                        globe.controls().autoRotate = false; // Keep it false to prevent auto-rotation
                     }
                 })
                 .onPointClick(point => {
                     if (point) {
-                        const conf = data.conferences
-                            .find(conf => conf.lat === point.lat && conf.lng === point.lng);
+                        const conf = data.conferences.find(c => c.lat === point.lat && c.lng === point.lng);
                         if (conf) {
                             window.open(conf.url, '_blank');
                         }
                     }
                 });
+
+            // Add 3D arrows
+            const arrowData = markers.map(marker => ({
+                startLat: marker.lat,
+                startLng: marker.lng,
+                endLat: marker.lat,
+                endLng: marker.lng,
+                color: marker.color
+            }));
+
+            globe.arcsData(arrowData)
+                .arcColor('color')
+                .arcAltitude(0.2)
+                .arcStroke(0.5)
+                .arcDashLength(0.4)
+                .arcDashGap(0.2)
+                .arcDashAnimateTime(1500);
+
+            if (showSummer) {
+                globe.atmosphereColor('#FFB6C1');
+            } else {
+                globe.atmosphereColor('lightskyblue');
+            }
         }
 
         function updateLists() {
