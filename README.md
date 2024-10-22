@@ -506,9 +506,9 @@
                     title: "Artificial Intelligence and the Professions",
                     date: "2024-12-05",
                     location: "Online",
-                    url: "",
-                    lat: 0, // Online event, no specific location
-                    lng: 0
+                    url: "https://philevents.org/event/show/125678",
+                    lat: null, // Online event, no specific location
+                    lng: null
                 }
             ]
         };
