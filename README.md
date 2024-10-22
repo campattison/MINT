@@ -507,7 +507,7 @@
                     date: "2024-12-05",
                     location: "Online",
                     url: "https://philevents.org/event/show/125678",
-                    lat: -75, // Online event, no specific location
+                    lat: -82, // Online event, no specific location
                     lng: 0
                 }
             ]
