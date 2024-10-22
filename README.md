@@ -441,10 +441,10 @@
                 {
                     title: "AISoLA, Conference Track Responsible and Trusted AI: An Interdisciplinary Perspective",
                     date: "2024-10-30",
-                    location: "Aldemar Knossos Royal, Limenas Hersonissou, Irákleion 700 14, Greece",
-                    url: "https://2024-isola.isola-conference.org/",
-                    lat: 35.3255, // Updated coordinates for Crete, Greece
-                    lng: 25.1445
+                    location: "TBD",
+                    url: "",
+                    lat: 0,
+                    lng: 0
                 },
                 {
                     title: "AI and Human Dignity",
@@ -617,31 +617,34 @@
                     const date = new Date(conf.date);
                     return selectedMonths.includes('all') || selectedMonths.includes(date.getMonth().toString());
                 })
-                .map(conf => ({
-                    lat: conf.lat,
-                    lng: conf.lng,
-                    size: 0.5,
-                    color: selectedMonths.includes('all') ? '#FFD700' : '#3498db',
-                    label: `
-                        <div style="
-                            text-align: center; 
-                            background-color: ${selectedMonths.includes('all') ? 'rgba(255,223,186,0.9)' : 'rgba(255,255,255,0.9)'}; 
-                            padding: 10px; 
-                            border-radius: 5px;
-                            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-                            font-family: Arial, sans-serif;
-                        ">
-                            <strong style="color: ${selectedMonths.includes('all') ? '#8B4513' : '#2c3e50'}; font-size: 14px;">${conf.title}</strong><br>
-                            <span style="color: ${selectedMonths.includes('all') ? '#CD853F' : '#34495e'}; font-size: 12px;">${formatDate(conf.date)}<br>${conf.location}</span><br>
-                            <a href="${conf.url}" target="_blank" style="
-                                color: ${selectedMonths.includes('all') ? '#0000FF' : '#3498db'}; 
-                                text-decoration: none; 
-                                font-weight: bold;
-                                font-size: 12px;
-                            ">More information</a>
-                        </div>
-                    `,
-                }));
+                .map(conf => {
+                    const isAntarctica = conf.lat < -60;
+                    return {
+                        lat: conf.lat,
+                        lng: conf.lng,
+                        size: 0.5,
+                        color: isAntarctica ? '#FF69B4' : (selectedMonths.includes('all') ? '#FFD700' : '#3498db'),
+                        label: `
+                            <div style="
+                                text-align: center; 
+                                background-color: ${isAntarctica ? 'rgba(255,105,180,0.9)' : (selectedMonths.includes('all') ? 'rgba(255,223,186,0.9)' : 'rgba(255,255,255,0.9)')}; 
+                                padding: 10px; 
+                                border-radius: 5px;
+                                box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+                                font-family: Arial, sans-serif;
+                            ">
+                                <strong style="color: ${isAntarctica ? '#8B008B' : (selectedMonths.includes('all') ? '#8B4513' : '#2c3e50')}; font-size: 14px;">${conf.title}</strong><br>
+                                <span style="color: ${isAntarctica ? '#4B0082' : (selectedMonths.includes('all') ? '#CD853F' : '#34495e')}; font-size: 12px;">${formatDate(conf.date)}<br>${conf.location}</span><br>
+                                <a href="${conf.url}" target="_blank" style="
+                                    color: ${isAntarctica ? '#0000FF' : (selectedMonths.includes('all') ? '#0000FF' : '#3498db')}; 
+                                    text-decoration: none; 
+                                    font-weight: bold;
+                                    font-size: 12px;
+                                ">More information</a>
+                            </div>
+                        `,
+                    };
+                });
 
             globe.pointsData(markers)
                 .pointAltitude(0.01)
@@ -734,6 +737,13 @@
                 spread: 120,
                 startVelocity: 45,
             });
+        }
+
+        function getRandomAntarcticaCoordinates() {
+            // Antarctica is roughly between -60 and -90 latitude, and all longitudes
+            const lat = Math.random() * (-60 - (-90)) + (-90);
+            const lng = Math.random() * 360 - 180;
+            return { lat, lng };
         }
 
         // Initial update
