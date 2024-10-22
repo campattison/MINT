@@ -467,11 +467,22 @@
                     size: 0.5,
                     color: showSummer ? '#FFD700' : '#3498db',
                     label: `
-                        <div style="text-align: center; background-color: rgba(255,255,255,0.8); padding: 10px; border-radius: 5px;">
-                            <strong>${conf.title}</strong><br>
-                            ${formatDate(conf.date)}<br>
-                            ${conf.location}<br>
-                            <a href="${conf.url}" target="_blank" style="color: #3498db;">More information</a>
+                        <div style="
+                            text-align: center; 
+                            background-color: ${showSummer ? 'rgba(255,223,186,0.9)' : 'rgba(255,255,255,0.9)'}; 
+                            padding: 10px; 
+                            border-radius: 5px;
+                            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+                            font-family: Arial, sans-serif;
+                        ">
+                            <strong style="color: ${showSummer ? '#8B4513' : '#2c3e50'}; font-size: 14px;">${conf.title}</strong><br>
+                            <span style="color: ${showSummer ? '#CD853F' : '#34495e'}; font-size: 12px;">${formatDate(conf.date)}<br>${conf.location}</span><br>
+                            <a href="${conf.url}" target="_blank" style="
+                                color: ${showSummer ? '#0000FF' : '#3498db'}; 
+                                text-decoration: none; 
+                                font-weight: bold;
+                                font-size: 12px;
+                            ">More information</a>
                         </div>
                     `,
                 }));
