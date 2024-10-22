@@ -618,10 +618,14 @@
                     return selectedMonths.includes('all') || selectedMonths.includes(date.getMonth().toString());
                 })
                 .map(conf => {
-                    const isAntarctica = conf.lat < -60;
+                    let { lat, lng } = conf;
+                    if ((lat === 0 && lng === 0) || lat === null || lng === null) {
+                        ({ lat, lng } = getRandomAntarcticaCoordinates());
+                    }
+                    const isAntarctica = lat < -60;
                     return {
-                        lat: conf.lat,
-                        lng: conf.lng,
+                        lat,
+                        lng,
                         size: 0.5,
                         color: isAntarctica ? '#FF69B4' : (selectedMonths.includes('all') ? '#FFD700' : '#3498db'),
                         label: `
