@@ -86,6 +86,67 @@
                 font-size: 2em;
             }
         }
+        #map-controls {
+            margin-bottom: 10px;
+        }
+
+        .leaflet-popup-content-wrapper {
+            border-radius: 8px;
+            padding: 10px;
+        }
+
+        .leaflet-popup-content {
+            margin: 5px;
+        }
+
+        .custom-icon {
+            background-color: #3498db;
+            border-radius: 50%;
+            border: 2px solid #fff;
+        }
+
+        .summer-icon {
+            background-color: #FFD700;  /* Gold color for summer */
+            border: 2px solid #FF6347;  /* Tomato color border */
+            border-radius: 50%;
+            box-shadow: 0 0 10px #FFD700;  /* Glow effect */
+        }
+
+        .summer-popup .leaflet-popup-content-wrapper {
+            background: linear-gradient(135deg, #87CEEB, #3CB371);  /* Sky Blue to Sea Green */
+            border: 2px solid #FF6347;
+        }
+
+        .summer-popup .leaflet-popup-tip {
+            background: #3CB371;  /* Sea Green */
+        }
+
+        .summer-map {
+            border: 10px solid transparent;
+            border-image: url('https://example.com/beach-border.png') 30 round;  /* Replace with actual beach-themed border image */
+        }
+
+        .summer-toggle-label {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #87CEEB;
+            border-radius: 15px;
+            transition: background-color 0.3s;
+        }
+
+        .summer-toggle-label.active {
+            background-color: #FFD700;
+        }
+
+        /* Fun animation for summer icons */
+        @keyframes summerBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .summer-icon {
+            animation: summerBounce 1s infinite;
+        }
     </style>
 </head>
 <body>
@@ -105,6 +166,11 @@
         </div>
         <div class="section" id="map-section">
             <h2>Conference Locations</h2>
+            <div id="map-controls">
+                <label class="summer-toggle-label">
+                    <input type="checkbox" id="summer-toggle"> Show Summer Conferences ☀️🏖️
+                </label>
+            </div>
             <div id="map" style="height: 400px;"></div>
         </div>
     </div>
@@ -311,6 +377,64 @@
                     <span class="date">${conference.date}</span>, <span class="location">${conference.location}</span>`;
         }
 
+        let map, markers;
+
+        function createMap() {
+            map = L.map('map').setView([20, 0], 2);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+
+            markers = L.layerGroup().addTo(map);
+            updateMarkers();
+
+            const summerToggle = document.getElementById('summer-toggle');
+            summerToggle.addEventListener('change', function() {
+                updateMarkers();
+                document.querySelector('.summer-toggle-label').classList.toggle('active');
+                map.getContainer().classList.toggle('summer-map');
+            });
+        }
+
+        function updateMarkers() {
+            markers.clearLayers();
+            const showSummer = document.getElementById('summer-toggle').checked;
+
+            data.conferences.forEach(conf => {
+                const date = new Date(conf.date);
+                const isSummer = date.getMonth() >= 5 && date.getMonth() <= 7; // June, July, August
+
+                if ((showSummer && isSummer) || (!showSummer && !isSummer)) {
+                    const icon = L.divIcon({
+                        className: showSummer ? 'custom-icon summer-icon' : 'custom-icon',
+                        html: `<div style="width: 10px; height: 10px;"></div>`,
+                        iconSize: [10, 10],
+                        iconAnchor: [5, 5]
+                    });
+
+                    const marker = L.marker([conf.lat, conf.lng], {icon: icon}).addTo(markers);
+                    
+                    const popupContent = `
+                        <b>${conf.title}</b><br>
+                        ${conf.date}<br>
+                        ${conf.location}<br>
+                        <a href="${conf.url}" target="_blank">More info</a>
+                        ${showSummer ? '<br><br>🏖️ Enjoy the summer vibes! 🌞' : ''}
+                    `;
+
+                    const popupOptions = showSummer ? { className: 'summer-popup' } : {};
+                    marker.bindPopup(popupContent, popupOptions);
+                    
+                    const tooltipContent = showSummer ? `☀️ ${conf.title}` : conf.title;
+                    marker.bindTooltip(tooltipContent, {
+                        permanent: false,
+                        direction: 'top',
+                        opacity: 0.7
+                    });
+                }
+            });
+        }
+
         function updateLists() {
             const sortedPapers = sortByDateDescending(data.papers);
             const sortedCFPs = sortByDateAscending(data.cfps);
@@ -328,19 +452,6 @@
 
         // Update every day (86400000 milliseconds = 24 hours)
         setInterval(updateLists, 86400000);
-
-        function createMap() {
-            const map = L.map('map').setView([0, 0], 2);
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '© OpenStreetMap contributors'
-            }).addTo(map);
-
-            data.conferences.forEach(conf => {
-                L.marker([conf.lat, conf.lng])
-                    .addTo(map)
-                    .bindPopup(`<b>${conf.title}</b><br>${conf.date}<br>${conf.location}<br><a href="${conf.url}" target="_blank">More info</a>`);
-            });
-        }
     </script>
 </body>
 </html>
