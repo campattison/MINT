@@ -344,7 +344,7 @@
                 {
                     title: "Symposium 2025: Aristotle in the Era of A.I. - Call for Participation",
                     deadline: "2025-01-07",
-                    url: "http://www.academyofathens.gr/en/aristotle-ai"
+                    url: "mailto:aristotle.ai@academyofathens.gr"
                 }
             ],
             conferences: [
@@ -368,7 +368,7 @@
                     title: "Symposium 2025: Aristotle in the Era of A.I.",
                     date: "2025-07-10",
                     location: "Academy of Athens, Greece",
-                    url: "http://www.academyofathens.gr/en/aristotle-ai",
+                    url: "mailto:info@academyofathens.gr",
                     lat: 37.9838,
                     lng: 23.7275
                 }
