@@ -419,7 +419,7 @@
                         ${conf.date}<br>
                         ${conf.location}<br>
                         <a href="${conf.url}" target="_blank">More info</a>
-                        ${showSummer ? '<br><br>🏖️ Enjoy the summer vibes! 🌞' : ''}
+                        ${showSummer ? '<br><br>🏖️ Enjoy the summer! 🌞' : ''}
                     `;
 
                     const popupOptions = showSummer ? { className: 'summer-popup' } : {};
