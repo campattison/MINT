@@ -589,6 +589,8 @@
                             selectedMonths.push(month);
                             if (['5', '6', '7'].includes(month)) { // Summer months (June, July, August)
                                 shootConfetti();
+                            } else if (month === '11') { // December
+                                createSnowfall();
                             }
                         } else {
                             selectedMonths = selectedMonths.filter(m => m !== month);
@@ -623,24 +625,36 @@
                         ({ lat, lng } = getRandomAntarcticaCoordinates());
                     }
                     const isAntarctica = lat < -60;
+                    const date = new Date(conf.date);
+                    const isDecember = date.getMonth() === 11;
                     return {
                         lat,
                         lng,
                         size: 0.5,
-                        color: isAntarctica ? '#FF69B4' : (selectedMonths.includes('all') ? '#FFD700' : '#3498db'),
+                        color: isAntarctica ? '#FF69B4' : 
+                               (isDecember ? '#C41E3A' : // Christmas red for December
+                               (selectedMonths.includes('all') ? '#FFD700' : '#3498db')),
                         label: `
                             <div style="
                                 text-align: center; 
-                                background-color: ${isAntarctica ? 'rgba(255,105,180,0.9)' : (selectedMonths.includes('all') ? 'rgba(255,223,186,0.9)' : 'rgba(255,255,255,0.9)')}; 
+                                background-color: ${isAntarctica ? 'rgba(255,105,180,0.9)' : 
+                                            (isDecember ? 'rgba(196,30,58,0.9)' : // Christmas red background for December
+                                            (selectedMonths.includes('all') ? 'rgba(255,223,186,0.9)' : 'rgba(255,255,255,0.9)'))}; 
                                 padding: 10px; 
                                 border-radius: 5px;
                                 box-shadow: 0 2px 5px rgba(0,0,0,0.2);
                                 font-family: Arial, sans-serif;
                             ">
-                                <strong style="color: ${isAntarctica ? '#8B008B' : (selectedMonths.includes('all') ? '#8B4513' : '#2c3e50')}; font-size: 14px;">${conf.title}</strong><br>
-                                <span style="color: ${isAntarctica ? '#4B0082' : (selectedMonths.includes('all') ? '#CD853F' : '#34495e')}; font-size: 12px;">${formatDate(conf.date)}<br>${conf.location}</span><br>
+                                <strong style="color: ${isAntarctica ? '#8B008B' : 
+                                                (isDecember ? '#FFFFFF' : // White text for December
+                                                (selectedMonths.includes('all') ? '#8B4513' : '#2c3e50'))}; font-size: 14px;">${conf.title}</strong><br>
+                                <span style="color: ${isAntarctica ? '#4B0082' : 
+                                             (isDecember ? '#F0F0F0' : // Light gray text for December
+                                             (selectedMonths.includes('all') ? '#CD853F' : '#34495e'))}; font-size: 12px;">${formatDate(conf.date)}<br>${conf.location}</span><br>
                                 <a href="${conf.url}" target="_blank" style="
-                                    color: ${isAntarctica ? '#0000FF' : (selectedMonths.includes('all') ? '#0000FF' : '#3498db')}; 
+                                    color: ${isAntarctica ? '#0000FF' : 
+                                            (isDecember ? '#90EE90' : // Light green for December
+                                            (selectedMonths.includes('all') ? '#0000FF' : '#3498db'))}; 
                                     text-decoration: none; 
                                     font-weight: bold;
                                     font-size: 12px;
@@ -744,10 +758,45 @@
         }
 
         function getRandomAntarcticaCoordinates() {
-            // Antarctica is roughly between -60 and -90 latitude, and all longitudes
-            const lat = Math.random() * (-60 - (-90)) + (-90);
-            const lng = Math.random() * 360 - 180;
+            // Adjusted to be more central on the continent
+            const lat = Math.random() * (-70 - (-85)) + (-85); // Focus on the central region
+            const lng = Math.random() * 360 - 180; // Still covering all longitudes
             return { lat, lng };
+        }
+
+        function createSnowfall() {
+            const duration = 15 * 1000;
+            const animationEnd = Date.now() + duration;
+            let skew = 1;
+
+            function randomInRange(min, max) {
+                return Math.random() * (max - min) + min;
+            }
+
+            (function frame() {
+                const timeLeft = animationEnd - Date.now();
+                const ticks = Math.max(200, 500 * (timeLeft / duration));
+                skew = Math.max(0.8, skew - 0.001);
+
+                confetti({
+                    particleCount: 1,
+                    startVelocity: 0,
+                    ticks: ticks,
+                    origin: {
+                        x: Math.random(),
+                        y: (Math.random() * skew) - 0.2
+                    },
+                    colors: ['#ffffff'],
+                    shapes: ['circle'],
+                    gravity: randomInRange(0.4, 0.6),
+                    scalar: randomInRange(0.4, 1),
+                    drift: randomInRange(-0.4, 0.4)
+                });
+
+                if (timeLeft > 0) {
+                    requestAnimationFrame(frame);
+                }
+            }());
         }
 
         // Initial update
