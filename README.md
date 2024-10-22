@@ -182,6 +182,42 @@
         .summer-toggle-label.active {
             background-color: #FFD700;
         }
+
+        #month-selector {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .month-button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 20px;
+            background-color: #f0f0f0;
+            color: #333;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .month-button:hover {
+            background-color: #e0e0e0;
+        }
+
+        .month-button.active {
+            background-color: #3498db;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .month-button {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -201,12 +237,22 @@
         </div>
         <div class="section" id="map-section">
             <h2>Conference Locations</h2>
-            <div id="map-controls">
-                <label class="summer-toggle-label">
-                    <input type="checkbox" id="summer-toggle"> Show Summer Conferences ☀️🌴
-                </label>
-            </div>
             <div id="globeViz"></div>
+            <div id="month-selector">
+                <button class="month-button active" data-month="all">All Conferences</button>
+                <button class="month-button" data-month="0">Jan</button>
+                <button class="month-button" data-month="1">Feb</button>
+                <button class="month-button" data-month="2">Mar</button>
+                <button class="month-button" data-month="3">Apr</button>
+                <button class="month-button" data-month="4">May</button>
+                <button class="month-button" data-month="5">Jun</button>
+                <button class="month-button" data-month="6">Jul</button>
+                <button class="month-button" data-month="7">Aug</button>
+                <button class="month-button" data-month="8">Sep</button>
+                <button class="month-button" data-month="9">Oct</button>
+                <button class="month-button" data-month="10">Nov</button>
+                <button class="month-button" data-month="11">Dec</button>
+            </div>
         </div>
     </div>
    
@@ -413,6 +459,7 @@
         }
 
         let globe;
+        let selectedMonths = ['all'];
 
         function createGlobe() {
             const globeContainer = document.getElementById('globeViz');
@@ -432,18 +479,35 @@
             // Stop auto-rotation
             globe.controls().autoRotate = false;
 
-            updateMarkers();
-
-            const summerToggle = document.getElementById('summer-toggle');
-            summerToggle.addEventListener('change', function() {
-                updateMarkers();
-                document.querySelector('.summer-toggle-label').classList.toggle('active');
-                if (this.checked) {
-                    globe.globeImageUrl('//unpkg.com/three-globe/example/img/earth-day.jpg');
-                } else {
-                    globe.globeImageUrl('//unpkg.com/three-globe/example/img/earth-blue-marble.jpg');
-                }
+            const monthButtons = document.querySelectorAll('.month-button');
+            monthButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const month = button.dataset.month;
+                    if (month === 'all') {
+                        selectedMonths = ['all'];
+                        monthButtons.forEach(btn => btn.classList.remove('active'));
+                        button.classList.add('active');
+                    } else {
+                        if (selectedMonths.includes('all')) {
+                            selectedMonths = [];
+                            document.querySelector('[data-month="all"]').classList.remove('active');
+                        }
+                        button.classList.toggle('active');
+                        if (button.classList.contains('active')) {
+                            selectedMonths.push(month);
+                        } else {
+                            selectedMonths = selectedMonths.filter(m => m !== month);
+                        }
+                        if (selectedMonths.length === 0) {
+                            selectedMonths = ['all'];
+                            document.querySelector('[data-month="all"]').classList.add('active');
+                        }
+                    }
+                    updateMarkers();
+                });
             });
+
+            updateMarkers();
         }
 
         function formatDate(dateString) {
@@ -453,32 +517,29 @@
         }
 
         function updateMarkers() {
-            const showSummer = document.getElementById('summer-toggle').checked;
-
             const markers = data.conferences
                 .filter(conf => {
                     const date = new Date(conf.date);
-                    const isSummer = date.getMonth() >= 5 && date.getMonth() <= 7;
-                    return (showSummer && isSummer) || (!showSummer && !isSummer);
+                    return selectedMonths.includes('all') || selectedMonths.includes(date.getMonth().toString());
                 })
                 .map(conf => ({
                     lat: conf.lat,
                     lng: conf.lng,
                     size: 0.5,
-                    color: showSummer ? '#FFD700' : '#3498db',
+                    color: selectedMonths.includes('all') ? '#FFD700' : '#3498db',
                     label: `
                         <div style="
                             text-align: center; 
-                            background-color: ${showSummer ? 'rgba(255,223,186,0.9)' : 'rgba(255,255,255,0.9)'}; 
+                            background-color: ${selectedMonths.includes('all') ? 'rgba(255,223,186,0.9)' : 'rgba(255,255,255,0.9)'}; 
                             padding: 10px; 
                             border-radius: 5px;
                             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
                             font-family: Arial, sans-serif;
                         ">
-                            <strong style="color: ${showSummer ? '#8B4513' : '#2c3e50'}; font-size: 14px;">${conf.title}</strong><br>
-                            <span style="color: ${showSummer ? '#CD853F' : '#34495e'}; font-size: 12px;">${formatDate(conf.date)}<br>${conf.location}</span><br>
+                            <strong style="color: ${selectedMonths.includes('all') ? '#8B4513' : '#2c3e50'}; font-size: 14px;">${conf.title}</strong><br>
+                            <span style="color: ${selectedMonths.includes('all') ? '#CD853F' : '#34495e'}; font-size: 12px;">${formatDate(conf.date)}<br>${conf.location}</span><br>
                             <a href="${conf.url}" target="_blank" style="
-                                color: ${showSummer ? '#0000FF' : '#3498db'}; 
+                                color: ${selectedMonths.includes('all') ? '#0000FF' : '#3498db'}; 
                                 text-decoration: none; 
                                 font-weight: bold;
                                 font-size: 12px;
@@ -525,7 +586,7 @@
                 .arcDashGap(0.2)
                 .arcDashAnimateTime(1500);
 
-            if (showSummer) {
+            if (selectedMonths.includes('all')) {
                 globe.atmosphereColor('#FFB6C1');
             } else {
                 globe.atmosphereColor('lightskyblue');
