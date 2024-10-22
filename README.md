@@ -6,6 +6,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/three"></script>
+    <script src="https://unpkg.com/globe.gl"></script>
     <style>
         :root {
             --primary-color: #3498db;
@@ -106,24 +108,30 @@
         }
 
         .summer-icon {
-            background-color: #FFD700;  /* Gold color for summer */
-            border: 2px solid #FF6347;  /* Tomato color border */
+            background-color: #FFD700;
+            border: 2px solid #FF6347;
             border-radius: 50%;
-            box-shadow: 0 0 10px #FFD700;  /* Glow effect */
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .summer-icon:hover {
+            transform: scale(1.2);
         }
 
         .summer-popup .leaflet-popup-content-wrapper {
-            background: linear-gradient(135deg, #87CEEB, #3CB371);  /* Sky Blue to Sea Green */
+            background: linear-gradient(135deg, #87CEEB, #3CB371);
             border: 2px solid #FF6347;
         }
 
         .summer-popup .leaflet-popup-tip {
-            background: #3CB371;  /* Sea Green */
+            background: #3CB371;
         }
 
         .summer-map {
             border: 10px solid transparent;
-            border-image: url('https://example.com/beach-border.png') 30 round;  /* Replace with actual beach-themed border image */
+            border-image: url('beach-border.png') 30 round;
+            transition: all 0.5s ease;
         }
 
         .summer-toggle-label {
@@ -138,14 +146,41 @@
             background-color: #FFD700;
         }
 
-        /* Fun animation for summer icons */
-        @keyframes summerBounce {
+        @keyframes gentleWave {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
+            50% { transform: translateY(-3px); }
         }
 
         .summer-icon {
-            animation: summerBounce 1s infinite;
+            animation: gentleWave 3s infinite ease-in-out;
+        }
+
+        .summer-map::after {
+            content: '☀️';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            animation: gentleWave 4s infinite ease-in-out;
+        }
+
+        #globeViz {
+            width: 100%;
+            height: 500px;
+            background-color: #000011;
+        }
+
+        .summer-toggle-label {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #87CEEB;
+            border-radius: 15px;
+            transition: background-color 0.3s;
+            margin-bottom: 10px;
+        }
+
+        .summer-toggle-label.active {
+            background-color: #FFD700;
         }
     </style>
 </head>
@@ -168,10 +203,10 @@
             <h2>Conference Locations</h2>
             <div id="map-controls">
                 <label class="summer-toggle-label">
-                    <input type="checkbox" id="summer-toggle"> Show Summer Conferences ☀️🏖️
+                    <input type="checkbox" id="summer-toggle"> Show Summer Conferences ☀️🌴
                 </label>
             </div>
-            <div id="map" style="height: 400px;"></div>
+            <div id="globeViz"></div>
         </div>
     </div>
    
@@ -377,62 +412,72 @@
                     <span class="date">${conference.date}</span>, <span class="location">${conference.location}</span>`;
         }
 
-        let map, markers;
+        let globe;
 
-        function createMap() {
-            map = L.map('map').setView([20, 0], 2);
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '© OpenStreetMap contributors'
-            }).addTo(map);
+        function createGlobe() {
+            const globeContainer = document.getElementById('globeViz');
+            const width = globeContainer.clientWidth;
+            const height = 500; // You can adjust this value
 
-            markers = L.layerGroup().addTo(map);
+            globe = Globe()
+                .globeImageUrl('//unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
+                .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
+                .width(width)
+                .height(height)
+                (globeContainer);
+
             updateMarkers();
 
             const summerToggle = document.getElementById('summer-toggle');
             summerToggle.addEventListener('change', function() {
                 updateMarkers();
                 document.querySelector('.summer-toggle-label').classList.toggle('active');
-                map.getContainer().classList.toggle('summer-map');
+                if (this.checked) {
+                    globe.globeImageUrl('//unpkg.com/three-globe/example/img/earth-day.jpg');
+                } else {
+                    globe.globeImageUrl('//unpkg.com/three-globe/example/img/earth-blue-marble.jpg');
+                }
             });
         }
 
         function updateMarkers() {
-            markers.clearLayers();
             const showSummer = document.getElementById('summer-toggle').checked;
 
-            data.conferences.forEach(conf => {
-                const date = new Date(conf.date);
-                const isSummer = date.getMonth() >= 5 && date.getMonth() <= 7; // June, July, August
+            const markers = data.conferences
+                .filter(conf => {
+                    const date = new Date(conf.date);
+                    const isSummer = date.getMonth() >= 5 && date.getMonth() <= 7;
+                    return (showSummer && isSummer) || (!showSummer && !isSummer);
+                })
+                .map(conf => ({
+                    lat: conf.lat,
+                    lng: conf.lng,
+                    size: 0.5,
+                    color: showSummer ? '#FFD700' : '#3498db',
+                    label: `${conf.title}\n${conf.date}\n${conf.location}`,
+                }));
 
-                if ((showSummer && isSummer) || (!showSummer && !isSummer)) {
-                    const icon = L.divIcon({
-                        className: showSummer ? 'custom-icon summer-icon' : 'custom-icon',
-                        html: `<div style="width: 10px; height: 10px;"></div>`,
-                        iconSize: [10, 10],
-                        iconAnchor: [5, 5]
-                    });
-
-                    const marker = L.marker([conf.lat, conf.lng], {icon: icon}).addTo(markers);
-                    
-                    const popupContent = `
-                        <b>${conf.title}</b><br>
-                        ${conf.date}<br>
-                        ${conf.location}<br>
-                        <a href="${conf.url}" target="_blank">More info</a>
-                        ${showSummer ? '<br><br>🏖️ Enjoy the summer! 🌞' : ''}
-                    `;
-
-                    const popupOptions = showSummer ? { className: 'summer-popup' } : {};
-                    marker.bindPopup(popupContent, popupOptions);
-                    
-                    const tooltipContent = showSummer ? `☀️ ${conf.title}` : conf.title;
-                    marker.bindTooltip(tooltipContent, {
-                        permanent: false,
-                        direction: 'top',
-                        opacity: 0.7
-                    });
-                }
-            });
+            globe.pointsData(markers)
+                .pointAltitude(0.01)
+                .pointColor('color')
+                .pointLabel('label')
+                .pointRadius('size')
+                .onPointHover(point => {
+                    if (point) {
+                        globe.controls().autoRotate = false;
+                    } else {
+                        globe.controls().autoRotate = true;
+                    }
+                })
+                .onPointClick(point => {
+                    if (point) {
+                        const conf = data.conferences
+                            .find(conf => conf.lat === point.lat && conf.lng === point.lng);
+                        if (conf) {
+                            window.open(conf.url, '_blank');
+                        }
+                    }
+                });
         }
 
         function updateLists() {
@@ -444,7 +489,7 @@
             updateList(sortedCFPs, 'cfps-list', () => true, formatCFP);
             updateList(sortedConferences, 'conferences-list', () => true, formatConference);
 
-            createMap();
+            createGlobe();
         }
 
         // Initial update
