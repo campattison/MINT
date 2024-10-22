@@ -204,6 +204,13 @@
                     journal: "arXiv",
                     date: "2024-10-17",
                     url: "http://arxiv.org/abs/2410.13722"
+                },
+                {
+                    title: "Improving Instruction-Following in Language Models through Activation Steering",
+                    authors: "Alessandro Stolfo, Vidhisha Balachandran, Safoora Yousefi, Eric Horvitz, Besmira Nushi",
+                    journal: "arXiv",
+                    date: "2024-10-15",
+                    url: "https://arxiv.org/abs/2410.12877"
                 }
             ],
             cfps: [
