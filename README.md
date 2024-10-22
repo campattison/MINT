@@ -8,6 +8,7 @@
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script src="https://unpkg.com/three"></script>
     <script src="https://unpkg.com/globe.gl"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
         :root {
             --primary-color: #3498db;
@@ -168,6 +169,8 @@
             width: 100%;
             height: 500px;
             background-color: #000011;
+            position: relative;
+            z-index: 10;
         }
 
         .summer-toggle-label {
@@ -189,6 +192,8 @@
             justify-content: center;
             gap: 10px;
             margin-top: 20px;
+            position: relative;
+            z-index: 5;
         }
 
         .month-button {
@@ -495,6 +500,9 @@
                         button.classList.toggle('active');
                         if (button.classList.contains('active')) {
                             selectedMonths.push(month);
+                            if (['5', '6', '7'].includes(month)) { // Summer months (June, July, August)
+                                shootConfetti();
+                            }
                         } else {
                             selectedMonths = selectedMonths.filter(m => m !== month);
                         }
@@ -603,6 +611,42 @@
             updateList(sortedConferences, 'conferences-list', () => true, formatConference);
 
             createGlobe();
+        }
+
+        function shootConfetti() {
+            const count = 200;
+            const defaults = {
+                origin: { y: 0.7 }
+            };
+
+            function fire(particleRatio, opts) {
+                confetti(Object.assign({}, defaults, opts, {
+                    particleCount: Math.floor(count * particleRatio)
+                }));
+            }
+
+            fire(0.25, {
+                spread: 26,
+                startVelocity: 55,
+            });
+            fire(0.2, {
+                spread: 60,
+            });
+            fire(0.35, {
+                spread: 100,
+                decay: 0.91,
+                scalar: 0.8
+            });
+            fire(0.1, {
+                spread: 120,
+                startVelocity: 25,
+                decay: 0.92,
+                scalar: 1.2
+            });
+            fire(0.1, {
+                spread: 120,
+                startVelocity: 45,
+            });
         }
 
         // Initial update
