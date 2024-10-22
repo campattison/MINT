@@ -395,8 +395,23 @@
                 {
                     title: "Symposium 2025: Aristotle in the Era of A.I. - Call for Participation",
                     deadline: "2025-01-07",
-                    url: "mailto:aristotle.ai@academyofathens.gr"
-                }
+                    url: "http://www.academyofathens.gr/en/aristotle-ai"
+                },
+                {
+                    title: "Second International Symposium on Politics of Technologies in the Digital Age PHILOSOPHICAL AND INTERDISCIPLINARY PERSPECTIVES ON THE DIGITAL TRANSFORMATION OF THE PUBLIC SPHERE",
+                    deadline: "2024-09-15",
+                    url: "https://philevents.org/event/show/122038"
+                },
+                {
+                    title: "2nd Annual National Symposium on Equitable AI",
+                    deadline: "2024-11-15",
+                    url: "https://philevents.org/event/show/127690"
+                },
+                {
+                    title: "TexneCON 2025: Tech Ethics eXchange NorthEast, an Ethics of Technology Conference (including AI)",
+                    deadline: "2024-11-01",
+                    url: "https://philevents.org/event/show/126054"
+                },
             ],
             conferences: [
                 {
@@ -419,9 +434,81 @@
                     title: "Symposium 2025: Aristotle in the Era of A.I.",
                     date: "2025-07-10",
                     location: "Academy of Athens, Greece",
-                    url: "mailto:info@academyofathens.gr",
+                    url: "http://www.academyofathens.gr/en/aristotle-ai",
                     lat: 37.9838,
                     lng: 23.7275
+                },
+                {
+                    title: "AISoLA, Conference Track Responsible and Trusted AI: An Interdisciplinary Perspective",
+                    date: "2024-10-30",
+                    location: "Aldemar Knossos Royal, Limenas Hersonissou, Irákleion 700 14, Greece",
+                    url: "https://2024-isola.isola-conference.org/",
+                    lat: 35.3255, // Updated coordinates for Crete, Greece
+                    lng: 25.1445
+                },
+                {
+                    title: "AI and Human Dignity",
+                    date: "2024-10-31",
+                    location: "Friedrich-Alexander-University Erlangen-Nürnberg, Germany",
+                    url: "",
+                    lat: 49.5979, // Approximate coordinates for Erlangen
+                    lng: 11.0045
+                },
+                {
+                    title: "TexneCON 2025: Tech Ethics eXchange NorthEast, an Ethics of Technology Conference",
+                    date: "2024-11-01",
+                    location: "Massachusetts Institute of Technology, Cambridge, MA, USA",
+                    url: "https://philevents.org/event/show/126050",
+                    lat: 42.3601,
+                    lng: -71.0942
+                },
+                {
+                    title: "AI and Human Dignity",
+                    date: "2024-11-14",
+                    location: "UNAM, Mexico City, Mexico",
+                    url: "https://philevents.org/event/show/121922",
+                    lat: 19.3262,
+                    lng: -99.1761
+                },
+                {
+                    title: "2nd Annual National Symposium on Equitable AI",
+                    date: "2024-11-15",
+                    location: "Morgan State University, Baltimore, MD, USA",
+                    url: "https://philevents.org/event/show/127686",
+                    lat: 39.3434,
+                    lng: -76.5830
+                },
+                {
+                    title: "AI and the Future of Science",
+                    date: "2024-11-20",
+                    location: "Lingnan University, Hong Kong",
+                    url: "https://philevents.org/event/show/123930",
+                    lat: 22.3363,
+                    lng: 114.1641
+                },
+                {
+                    title: "Second International Symposium on Politics of Technologies in the Digital Age",
+                    date: "2024-11-21",
+                    location: "University of Ioannina, Greece",
+                    url: "https://philevents.org/event/show/122038",
+                    lat: 39.6178,
+                    lng: 20.8508
+                },
+                {
+                    title: "Melanie Mitchell - AI's Challenge of Understanding the World",
+                    date: "2024-11-22",
+                    location: "University of Pittsburgh, PA, USA",
+                    url: "https://philevents.org/event/show/127010",
+                    lat: 40.4444,
+                    lng: -79.9608
+                },
+                {
+                    title: "Artificial Intelligence and the Professions",
+                    date: "2024-12-05",
+                    location: "Online",
+                    url: "",
+                    lat: 0, // Online event, no specific location
+                    lng: 0
                 }
             ]
         };
