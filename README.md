@@ -4,6 +4,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Research Hub: Normative Philosophy of Computing</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <style>
         :root {
             --primary-color: #3498db;
@@ -100,6 +102,10 @@
         <div class="section" id="conferences-section">
             <h2>Upcoming Conferences and Events</h2>
             <ul id="conferences-list"></ul>
+        </div>
+        <div class="section" id="map-section">
+            <h2>Conference Locations</h2>
+            <div id="map" style="height: 400px;"></div>
         </div>
     </div>
    
@@ -245,19 +251,25 @@
                     title: "SRI Seminar Series 2024",
                     date: "2024-10-18",
                     location: "University of Toronto",
-                    url: "https://srinstitute.utoronto.ca/news/sri-seminar-series-returns-2024-grosse-abebe-dwork-huq-more"
+                    url: "https://srinstitute.utoronto.ca/news/sri-seminar-series-returns-2024-grosse-abebe-dwork-huq-more",
+                    lat: 43.6629,
+                    lng: -79.3957
                 },
                 {
                     title: "TeXne Conference",
                     date: "2025-02-01",
                     location: "MIT",
-                    url: "https://philevents.org/event/show/126054"
+                    url: "https://philevents.org/event/show/126054",
+                    lat: 42.3601,
+                    lng: -71.0942
                 },
                 {
                     title: "Symposium 2025: Aristotle in the Era of A.I.",
                     date: "2025-07-10",
                     location: "Academy of Athens, Greece",
-                    url: "mailto:info@academyofathens.gr"
+                    url: "mailto:info@academyofathens.gr",
+                    lat: 37.9838,
+                    lng: 23.7275
                 }
             ]
         };
@@ -307,6 +319,8 @@
             updateList(sortedPapers, 'papers-list', () => true, formatPaper);
             updateList(sortedCFPs, 'cfps-list', () => true, formatCFP);
             updateList(sortedConferences, 'conferences-list', () => true, formatConference);
+
+            createMap();
         }
 
         // Initial update
@@ -314,6 +328,19 @@
 
         // Update every day (86400000 milliseconds = 24 hours)
         setInterval(updateLists, 86400000);
+
+        function createMap() {
+            const map = L.map('map').setView([0, 0], 2);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+
+            data.conferences.forEach(conf => {
+                L.marker([conf.lat, conf.lng])
+                    .addTo(map)
+                    .bindPopup(`<b>${conf.title}</b><br>${conf.date}<br>${conf.location}<br><a href="${conf.url}" target="_blank">More info</a>`);
+            });
+        }
     </script>
 </body>
 </html>
