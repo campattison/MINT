@@ -173,29 +173,6 @@
             z-index: 10;
         }
 
-        .summer-toggle-label {
-            display: inline-block;
-            padding: 5px 10px;
-            background-color: #87CEEB;
-            border-radius: 15px;
-            transition: background-color 0.3s;
-            margin-bottom: 10px;
-        }
-
-        .summer-toggle-label.active {
-            background-color: #FFD700;
-        }
-
-        #month-selector {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 20px;
-            position: relative;
-            z-index: 5;
-        }
-
         .month-button {
             padding: 10px 15px;
             border: none;
@@ -440,7 +417,7 @@
                 },
                 {
                     title: "AISoLA, Conference Track Responsible and Trusted AI: An Interdisciplinary Perspective",
-                    date: "2024-10-30",
+                    date: "2024-10-30 - 2024-11-03",
                     location: "Aldemar Knossos Royal, Crete, Greece",
                     url: "https://2024-isola.isola-conference.org/",
                     lat: 35.3253,
@@ -507,7 +484,7 @@
                     date: "2024-12-05",
                     location: "Online",
                     url: "https://philevents.org/event/show/125678",
-                    lat: -82, // Online event, no specific location
+                    lat: -75, // Online event, no specific location
                     lng: 0
                 }
             ]
@@ -522,15 +499,13 @@
             return items.sort((a, b) => new Date(a.date || a.deadline) - new Date(b.date || b.deadline));
         }
 
-        function updateList(items, listId, filterFunction, formatter) {
+        function updateList(items, listId, formatter) {
             const list = document.getElementById(listId);
             list.innerHTML = '';
             items.forEach(item => {
-                if (filterFunction(item.date || item.deadline)) {
-                    const li = document.createElement('li');
-                    li.innerHTML = formatter(item);
-                    list.appendChild(li);
-                }
+                const li = document.createElement('li');
+                li.innerHTML = formatter(item);
+                list.appendChild(li);
             });
         }
 
@@ -556,19 +531,18 @@
         function createGlobe() {
             const globeContainer = document.getElementById('globeViz');
             const width = globeContainer.clientWidth;
-            const height = 500; // You can adjust this value
+            const height = 500;
 
             globe = Globe()
                 .globeImageUrl('//unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
                 .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
                 .width(width)
                 .height(height)
-                .showAtmosphere(false)
+                .showAtmosphere(true)
                 .atmosphereColor('lightskyblue')
                 .atmosphereAltitude(0.1)
                 (globeContainer);
 
-            // Stop auto-rotation
             globe.controls().autoRotate = false;
 
             const monthButtons = document.querySelectorAll('.month-button');
@@ -587,9 +561,6 @@
                         button.classList.toggle('active');
                         if (button.classList.contains('active')) {
                             selectedMonths.push(month);
-                            if (['5', '6', '7'].includes(month)) { // Summer months (June, July, August)
-                                shootConfetti();
-                            }
                         } else {
                             selectedMonths = selectedMonths.filter(m => m !== month);
                         }
@@ -619,55 +590,43 @@
                 })
                 .map(conf => {
                     if (!conf.lat || !conf.lng) {
-                        return null; // Skip conferences without coordinates
+                        return null;
                     }
-                    const date = new Date(conf.date);
-                    const isDecember = date.getMonth() === 11;
-                    const isSummer = [5, 6, 7].includes(date.getMonth()); // June, July, August
-
                     return {
                         lat: conf.lat,
                         lng: conf.lng,
                         size: 0.5,
-                        color: isDecember ? '#C41E3A' : // Christmas red for December
-                               (isSummer ? '#FFD700' : // Bright green for summer
-                               (selectedMonths.includes('all') ? '#FFD700' : '#3498db')),
+                        color: '#3498db',
                         label: `
-                            <div style="
-                                text-align: center; 
-                                background-color: ${isDecember ? 'rgba(196,30,58,0.9)' : 
-                                            (isSummer ? 'rgba(255,215,0,0.9)' : 
-                                            (selectedMonths.includes('all') ? 'rgba(255,215,0,0.9)' : 'rgba(255,255,255,0.9)'))}; 
-                                padding: 10px; 
-                                border-radius: 5px;
-                                box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-                                font-family: Arial, sans-serif;
-                            ">
-                                <strong style="color: ${isDecember ? '#FFFFFF' : 
-                                                (isSummer ? '#8B4513' : 
-                                                (selectedMonths.includes('all') ? '#8B4513' : '#2c3e50'))}; font-size: 14px;">${conf.title}</strong><br>
-                                <span style="color: ${isDecember ? '#F0F0F0' : 
-                                             (isSummer ? '#CD853F' : 
-                                             (selectedMonths.includes('all') ? '#CD853F' : '#34495e'))}; font-size: 12px;">${formatDate(conf.date)}<br>${conf.location}</span><br>
-                                <a href="${conf.url}" target="_blank" style="
-                                    color: ${isDecember ? '#90EE90' : 
-                                            (isSummer ? '#0000FF' : 
-                                            (selectedMonths.includes('all') ? '#0000FF' : '#3498db'))}; 
-                                    text-decoration: none; 
-                                    font-weight: bold;
-                                    font-size: 12px;
-                                ">More information</a>
+                            <div style="text-align: center; background-color: rgba(255,255,255,0.9); padding: 10px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); font-family: Arial, sans-serif;">
+                                <strong style="color: #2c3e50; font-size: 14px;">${conf.title}</strong><br>
+                                <span style="color: #34495e; font-size: 12px;">${formatDate(conf.date)}<br>${conf.location}</span><br>
+                                <a href="${conf.url}" target="_blank" style="color: #3498db; text-decoration: none; font-weight: bold; font-size: 12px;">More information</a>
                             </div>
                         `,
                     };
                 })
-                .filter(marker => marker !== null); // Remove null markers
+                .filter(marker => marker !== null);
 
-            globe.pointsData(markers)
+            globe
+                .pointsData(markers)
                 .pointAltitude(0.01)
                 .pointColor('color')
                 .pointLabel('label')
-                .pointRadius('size');
+                .pointRadius('size')
+                .customLayerData(markers)
+                .customThreeObject(d => {
+                    const sprite = new THREE.Sprite(
+                        new THREE.SpriteMaterial({map: new THREE.TextureLoader().load('https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/sprites/disc.png')})
+                    );
+                    sprite.scale.set(2, 2, 1);
+                    sprite.material.color.set('#00ff00');
+                    return sprite;
+                })
+                .customThreeObjectUpdate((obj, d) => {
+                    Object.assign(obj.position, globe.getCoords(d.lat, d.lng, 0.1));
+                    obj.position.y += Math.sin(Date.now() / 1000) * 0.05; // Hovering effect
+                });
         }
 
         function updateLists() {
@@ -675,47 +634,11 @@
             const sortedCFPs = sortByDateAscending(data.cfps);
             const sortedConferences = sortByDateAscending(data.conferences);
 
-            updateList(sortedPapers, 'papers-list', () => true, formatPaper);
-            updateList(sortedCFPs, 'cfps-list', () => true, formatCFP);
-            updateList(sortedConferences, 'conferences-list', () => true, formatConference);
+            updateList(sortedPapers, 'papers-list', formatPaper);
+            updateList(sortedCFPs, 'cfps-list', formatCFP);
+            updateList(sortedConferences, 'conferences-list', formatConference);
 
             createGlobe();
-        }
-
-        function shootConfetti() {
-            const count = 200;
-            const defaults = {
-                origin: { y: 0.7 }
-            };
-
-            function fire(particleRatio, opts) {
-                confetti(Object.assign({}, defaults, opts, {
-                    particleCount: Math.floor(count * particleRatio)
-                }));
-            }
-
-            fire(0.25, {
-                spread: 26,
-                startVelocity: 55,
-            });
-            fire(0.2, {
-                spread: 60,
-            });
-            fire(0.35, {
-                spread: 100,
-                decay: 0.91,
-                scalar: 0.8
-            });
-            fire(0.1, {
-                spread: 120,
-                startVelocity: 25,
-                decay: 0.92,
-                scalar: 1.2
-            });
-            fire(0.1, {
-                spread: 120,
-                startVelocity: 45,
-            });
         }
 
         // Initial update
