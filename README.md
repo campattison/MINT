@@ -222,18 +222,7 @@
             <div id="globeViz"></div>
             <div id="month-selector">
                 <button class="month-button active" data-month="all">All Conferences</button>
-                <button class="month-button" data-month="0">Jan</button>
-                <button class="month-button" data-month="1">Feb</button>
-                <button class="month-button" data-month="2">Mar</button>
-                <button class="month-button" data-month="3">Apr</button>
-                <button class="month-button" data-month="4">May</button>
-                <button class="month-button" data-month="5">Jun</button>
-                <button class="month-button" data-month="6">Jul</button>
-                <button class="month-button" data-month="7">Aug</button>
-                <button class="month-button" data-month="8">Sep</button>
-                <button class="month-button" data-month="9">Oct</button>
-                <button class="month-button" data-month="10">Nov</button>
-                <button class="month-button" data-month="11">Dec</button>
+                <!-- Month buttons will be dynamically inserted here -->
             </div>
         </div>
     </div>
@@ -417,7 +406,7 @@
                 },
                 {
                     title: "AISoLA, Conference Track Responsible and Trusted AI: An Interdisciplinary Perspective",
-                    date: "2024-10-30",
+                    date: "2024-10-30 - 2024-11-03",
                     location: "Aldemar Knossos Royal, Crete, Greece",
                     url: "https://2024-isola.isola-conference.org/",
                     lat: 35.3253,
@@ -545,37 +534,60 @@
 
             globe.controls().autoRotate = false;
 
+            updateMonthButtons();
+            updateMarkers();
+        }
+
+        function updateMonthButtons() {
+            const monthSelector = document.getElementById('month-selector');
+            const allButton = monthSelector.querySelector('[data-month="all"]');
+            monthSelector.innerHTML = ''; // Clear existing buttons
+            monthSelector.appendChild(allButton); // Add back the "All Conferences" button
+
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            const currentMonth = new Date().getMonth();
+
+            for (let i = 0; i < 12; i++) {
+                const monthIndex = (currentMonth + i) % 12;
+                const button = document.createElement('button');
+                button.className = 'month-button';
+                button.setAttribute('data-month', monthIndex);
+                button.textContent = months[monthIndex];
+                monthSelector.appendChild(button);
+            }
+
+            // Re-add event listeners
             const monthButtons = document.querySelectorAll('.month-button');
             monthButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const month = button.dataset.month;
-                    if (month === 'all') {
-                        selectedMonths = ['all'];
-                        monthButtons.forEach(btn => btn.classList.remove('active'));
-                        button.classList.add('active');
-                    } else {
-                        if (selectedMonths.includes('all')) {
-                            selectedMonths = [];
-                            document.querySelector('[data-month="all"]').classList.remove('active');
-                        }
-                        button.classList.toggle('active');
-                        if (button.classList.contains('active')) {
-                            selectedMonths.push(month);
-                            if (['5', '6', '7'].includes(month)) { // Summer months (June, July, August)
-                                shootConfetti();
-                            }
-                        } else {
-                            selectedMonths = selectedMonths.filter(m => m !== month);
-                        }
-                        if (selectedMonths.length === 0) {
-                            selectedMonths = ['all'];
-                            document.querySelector('[data-month="all"]').classList.add('active');
-                        }
-                    }
-                    updateMarkers();
-                });
+                button.addEventListener('click', handleMonthButtonClick);
             });
+        }
 
+        function handleMonthButtonClick() {
+            const month = this.dataset.month;
+            if (month === 'all') {
+                selectedMonths = ['all'];
+                document.querySelectorAll('.month-button').forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+            } else {
+                if (selectedMonths.includes('all')) {
+                    selectedMonths = [];
+                    document.querySelector('[data-month="all"]').classList.remove('active');
+                }
+                this.classList.toggle('active');
+                if (this.classList.contains('active')) {
+                    selectedMonths.push(month);
+                    if (['5', '6', '7'].includes(month)) { // Summer months (June, July, August)
+                        shootConfetti();
+                    }
+                } else {
+                    selectedMonths = selectedMonths.filter(m => m !== month);
+                }
+                if (selectedMonths.length === 0) {
+                    selectedMonths = ['all'];
+                    document.querySelector('[data-month="all"]').classList.add('active');
+                }
+            }
             updateMarkers();
         }
 
@@ -698,9 +710,13 @@
 
         // Initial update
         updateLists();
+        createGlobe();
 
         // Update every day (86400000 milliseconds = 24 hours)
-        setInterval(updateLists, 86400000);
+        setInterval(() => {
+            updateLists();
+            updateMonthButtons();
+        }, 86400000);
     </script>
 </body>
 </html>
