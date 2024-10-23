@@ -591,25 +591,20 @@
                     const date = new Date(conf.date);
                     return selectedMonths.includes('all') || selectedMonths.includes(date.getMonth().toString());
                 })
-                .map(conf => {
-                    if (!conf.lat || !conf.lng) {
-                        return null;
-                    }
-                    return {
-                        lat: conf.lat,
-                        lng: conf.lng,
-                        size: 0.5,
-                        color: '#00ff00', // Bright green
-                        label: `
-                            <div style="text-align: center; background-color: rgba(255,255,255,0.9); padding: 10px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); font-family: Arial, sans-serif;">
-                                <strong style="color: #2c3e50; font-size: 14px;">${conf.title}</strong><br>
-                                <span style="color: #34495e; font-size: 12px;">${formatDate(conf.date)}<br>${conf.location}</span><br>
-                                <a href="${conf.url}" target="_blank" style="color: #3498db; text-decoration: none; font-weight: bold; font-size: 12px;">More information</a>
-                            </div>
-                        `,
-                    };
-                })
-                .filter(marker => marker !== null);
+                .map(conf => ({
+                    lat: conf.lat,
+                    lng: conf.lng,
+                    size: 0.5,
+                    color: '#00ff00', // Bright green
+                    label: `
+                        <div style="text-align: center; background-color: rgba(255,255,255,0.9); padding: 10px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); font-family: Arial, sans-serif;">
+                            <strong style="color: #2c3e50; font-size: 14px;">${conf.title}</strong><br>
+                            <span style="color: #34495e; font-size: 12px;">${formatDate(conf.date)}<br>${conf.location}</span><br>
+                            <a href="${conf.url}" target="_blank" style="color: #3498db; text-decoration: none; font-weight: bold; font-size: 12px;">More information</a>
+                        </div>
+                    `,
+                    url: conf.url // Add the URL to the marker data
+                }));
 
             // Add 3D arrows
             const arrowData = markers.map(marker => ({
@@ -633,6 +628,11 @@
                 .arcDashLength(0.9)
                 .arcDashGap(1)
                 .arcDashAnimateTime(2000)
+                .onPointClick(point => {
+                    if (point && point.url) {
+                        window.open(point.url, '_blank');
+                    }
+                })
                 .customLayerData(markers)
                 .customThreeObject(d => {
                     const sprite = new THREE.Sprite(
