@@ -596,7 +596,7 @@
                         lat: conf.lat,
                         lng: conf.lng,
                         size: 0.5,
-                        color: '#3498db',
+                        color: '#00ff00', // Bright green
                         label: `
                             <div style="text-align: center; background-color: rgba(255,255,255,0.9); padding: 10px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); font-family: Arial, sans-serif;">
                                 <strong style="color: #2c3e50; font-size: 14px;">${conf.title}</strong><br>
@@ -608,19 +608,35 @@
                 })
                 .filter(marker => marker !== null);
 
+            // Add 3D arrows
+            const arrowData = markers.map(marker => ({
+                startLat: marker.lat,
+                startLng: marker.lng,
+                endLat: marker.lat,
+                endLng: marker.lng,
+                color: '#00ff00' // Bright green
+            }));
+
             globe
                 .pointsData(markers)
                 .pointAltitude(0.01)
                 .pointColor('color')
                 .pointLabel('label')
                 .pointRadius('size')
+                .arcsData(arrowData)
+                .arcColor('color')
+                .arcAltitude(0.2)
+                .arcStroke(0.5)
+                .arcDashLength(0.9)
+                .arcDashGap(1)
+                .arcDashAnimateTime(2000)
                 .customLayerData(markers)
                 .customThreeObject(d => {
                     const sprite = new THREE.Sprite(
                         new THREE.SpriteMaterial({map: new THREE.TextureLoader().load('https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/sprites/disc.png')})
                     );
                     sprite.scale.set(2, 2, 1);
-                    sprite.material.color.set('#00ff00');
+                    sprite.material.color.set('#00ff00'); // Bright green
                     return sprite;
                 })
                 .customThreeObjectUpdate((obj, d) => {
