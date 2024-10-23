@@ -406,7 +406,7 @@
                 },
                 {
                     title: "AISoLA, Conference Track Responsible and Trusted AI: An Interdisciplinary Perspective",
-                    date: "2024-10-30 - 2024-11-03",
+                    date: "2024-10-30",
                     location: "Aldemar Knossos Royal, Crete, Greece",
                     url: "https://2024-isola.isola-conference.org/",
                     lat: 35.3253,
@@ -416,7 +416,7 @@
                     title: "AI and Human Dignity",
                     date: "2024-10-31",
                     location: "Friedrich-Alexander-University Erlangen-Nürnberg, Germany",
-                    url: "",
+                    url: "https://philevents.org/event/show/121918",
                     lat: 49.5979, // Approximate coordinates for Erlangen
                     lng: 11.0045
                 },
