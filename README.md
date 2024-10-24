@@ -398,7 +398,7 @@
                 },
                 {
                     title: "Symposium 2025: Aristotle in the Era of A.I.",
-                    date: "2025-07-10",
+                    date: "2025-04-07",
                     location: "Academy of Athens, Greece",
                     url: "http://www.academyofathens.gr/en/aristotle-ai",
                     lat: 37.9838,
