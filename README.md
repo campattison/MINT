@@ -308,7 +308,6 @@
                     date: "2024-09-24",
                     url: "https://link.springer.com/article/10.1007/s11098-024-02226-3"
                 },
-                {}
                 {
                     title: "Controllable Safety Alignment: Inference-Time Adaptation to Diverse Safety Requirements",
                     authors: "Jingyu Zhang, Ahmed Elgohary, Ahmed Magooda, Daniel Khashabi, Benjamin Van Durme",
