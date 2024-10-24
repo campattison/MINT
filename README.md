@@ -232,6 +232,13 @@
         const data = {
             papers: [
                 {
+                    title: "Teaching Models to Balance Resisting and Accepting Persuasion",
+                    authors: "Elias Stengel-Eskin, Peter Hase, Mohit Bansal",
+                    journal: "arXiv",
+                    date: "2024-10-18",
+                    url: "https://arxiv.org/abs/2410.14596"
+                },
+                {
                     title: "GSM-Symbolic: Understanding the Limitations of Mathematical Reasoning in Large Language Models",
                     authors: "Iman Mirzadeh, Keivan Alizadeh, Hooman Shahrokhi, Oncel Tuzel, Samy Bengio, Mehrdad Farajtabar",
                     journal: "Apple Research",
@@ -239,11 +246,25 @@
                     url: "https://arxiv.org/abs/2410.05229"
                 },
                 {
+                    title: "Scalable watermarking for identifying large language model outputs",
+                    authors: "Sumanth Dathathri, Abigail See, Sumedh Ghaisas, Po-Sen Huang, Rob McAdam, Johannes Welbl, Vandana Bachani, Alex Kaskasoli, Robert Stanforth, Tatiana Matejovicova, Jamie Hayes, Nidhi Vyas, Majd Al Merey, Jonah Brown-Cohen, Rudy Bunel, Borja Balle, Taylan Cemgil, Zahra Ahmed, Kitty Stacpoole, Ilia Shumailov, Ciprian Baetu, Sven Gowal, Demis Hassabis & Pushmeet Kohli ",
+                    journal: "Nature",
+                    date: "2024-10-23",
+                    url: "https://www.nature.com/articles/s41586-024-09696-8"
+                },
+                {
                     title: "Beneficent Intelligence: A Capability Approach to Modeling Benefit, Assistance, and Associated Moral Failures Through AI Systems",
                     authors: "London, A.J., Heidari, H.",
                     journal: "Minds & Machines",
                     date: "2024-09-01",
                     url: "https://doi.org/10.1007/s11023-024-09696-8"
+                },
+                {
+                    title: "Beyond Browsing: API-Based Web Agents",
+                    authors: "Yueqi Song, Frank Xu, Shuyan Zhou, Graham Neubig",
+                    journal: "arXiv",
+                    date: "2024-10-21",
+                    url: "https://arxiv.org/abs/2410.16464"
                 },
                 {
                     title: "Sabotage Evaluations for Frontier Models",
@@ -287,6 +308,7 @@
                     date: "2024-09-24",
                     url: "https://link.springer.com/article/10.1007/s11098-024-02226-3"
                 },
+                {}
                 {
                     title: "Controllable Safety Alignment: Inference-Time Adaptation to Diverse Safety Requirements",
                     authors: "Jingyu Zhang, Ahmed Elgohary, Ahmed Magooda, Daniel Khashabi, Benjamin Van Durme",
@@ -398,7 +420,7 @@
                 },
                 {
                     title: "Symposium 2025: Aristotle in the Era of A.I.",
-                    date: "2025-04-07",
+                    date: "2025-07-10",
                     location: "Academy of Athens, Greece",
                     url: "http://www.academyofathens.gr/en/aristotle-ai",
                     lat: 37.9838,
@@ -406,7 +428,7 @@
                 },
                 {
                     title: "AISoLA, Conference Track Responsible and Trusted AI: An Interdisciplinary Perspective",
-                    date: "2024-10-30",
+                    date: "2024-10-30 - 2024-11-03",
                     location: "Aldemar Knossos Royal, Crete, Greece",
                     url: "https://2024-isola.isola-conference.org/",
                     lat: 35.3253,
@@ -416,7 +438,7 @@
                     title: "AI and Human Dignity",
                     date: "2024-10-31",
                     location: "Friedrich-Alexander-University Erlangen-Nürnberg, Germany",
-                    url: "https://philevents.org/event/show/121918",
+                    url: "",
                     lat: 49.5979, // Approximate coordinates for Erlangen
                     lng: 11.0045
                 },
@@ -660,12 +682,17 @@
                 });
         }
 
+        function limitPapers(papers, limit = 20) {
+            return papers.slice(0, limit);
+        }
+
         function updateLists() {
             const sortedPapers = sortByDateDescending(data.papers);
+            const limitedPapers = limitPapers(sortedPapers, 20);
             const sortedCFPs = sortByDateAscending(data.cfps);
             const sortedConferences = sortByDateAscending(data.conferences);
 
-            updateList(sortedPapers, 'papers-list', formatPaper);
+            updateList(limitedPapers, 'papers-list', formatPaper);
             updateList(sortedCFPs, 'cfps-list', formatCFP);
             updateList(sortedConferences, 'conferences-list', formatConference);
 
