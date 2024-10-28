@@ -246,6 +246,13 @@
                     url: "https://arxiv.org/abs/2410.05229"
                 },
                 {
+                title: "The Code That Binds Us: Navigating the Appropriateness of Human-AI Assistant Relationships",
+                authors: "Arianna Manzini, Geoff Keeling, Lize Alberts, Shannon Vallor, Meredith Ringel Morris, Iason Gabriel",
+                journal: "Proceedings of the AAAI/ACM Conference on AI, Ethics, and Society",
+                date: "2024-10-16",
+                url: "https://ojs.aaai.org/index.php/AIES/article/view/31694"
+                },
+                {
                     title: "Scalable watermarking for identifying large language model outputs",
                     authors: "Sumanth Dathathri, Abigail See, Sumedh Ghaisas, Po-Sen Huang, Rob McAdam, Johannes Welbl, Vandana Bachani, Alex Kaskasoli, Robert Stanforth, Tatiana Matejovicova, Jamie Hayes, Nidhi Vyas, Majd Al Merey, Jonah Brown-Cohen, Rudy Bunel, Borja Balle, Taylan Cemgil, Zahra Ahmed, Kitty Stacpoole, Ilia Shumailov, Ciprian Baetu, Sven Gowal, Demis Hassabis & Pushmeet Kohli ",
                     journal: "Nature",
