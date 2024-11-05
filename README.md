@@ -590,16 +590,40 @@
         }
 
         function updateLists() {
-            const sortedPapers = sortByDateDescending(data.papers);
-            const limitedPapers = limitPapers(sortedPapers, 10);
-            const sortedCFPs = sortByDateAscending(data.cfps);
-            const sortedConferences = sortByDateAscending(data.conferences);
+            // Update papers lists
+            updateList(
+                sortByDateDescending(data.philosophyPapers), 
+                'philosophy-papers-list', 
+                formatPaper
+            );
+            
+            updateList(
+                sortByDateDescending(data.csPapers), 
+                'cs-papers-list', 
+                formatPaper
+            );
+            
+            updateList(
+                sortByDateDescending(data.hybridPapers), 
+                'hybrid-papers-list', 
+                formatPaper
+            );
 
-            updateList(limitedPapers, 'papers-list', formatPaper);
-            updateList(sortedCFPs, 'cfps-list', formatCFP);
-            updateList(sortedConferences, 'conferences-list', formatConference);
+            // Update CFPs and conferences if they exist in your data
+            if (data.cfps) {
+                const sortedCFPs = sortByDateAscending(data.cfps);
+                updateList(sortedCFPs, 'cfps-list', formatCFP);
+            }
 
-            createGlobe();
+            if (data.conferences) {
+                const sortedConferences = sortByDateAscending(data.conferences);
+                updateList(sortedConferences, 'conferences-list', formatConference);
+            }
+
+            // If you're using the globe visualization
+            if (typeof createGlobe === 'function') {
+                createGlobe();
+            }
         }
 
         function shootConfetti() {
