@@ -200,14 +200,54 @@
                 font-size: 12px;
             }
         }
+
+        .subsection {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: var(--card-background);
+            border-radius: 8px;
+            box-shadow: 0 2px 4px var(--shadow-color);
+        }
+
+        .subsection h3 {
+            color: var(--secondary-color);
+            margin-top: 0;
+            font-size: 1.3em;
+            border-bottom: 1px solid var(--primary-color);
+            padding-bottom: 8px;
+        }
+
+        .category-description {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Research Hub: Normative Philosophy of Computing</h1>
         <div class="section" id="papers-section">
-            <h2>Recent Papers</h2>
-            <ul id="papers-list"></ul>
+            <h2>Recent Publications</h2>
+            
+            <div class="subsection">
+                <h3>Conceptual & Normative Analysis</h3>
+                <p class="category-description">Papers focusing on philosophical frameworks, ethical implications, and conceptual foundations</p>
+                <ul id="philosophy-papers-list"></ul>
+            </div>
+
+            <div class="subsection">
+                <h3>Technical Implementation & Empirical Studies</h3>
+                <p class="category-description">Papers focusing on technical development, empirical results, and implementation approaches</p>
+                <ul id="cs-papers-list"></ul>
+            </div>
+
+            <div class="subsection">
+                <h3>Interdisciplinary Integration</h3>
+                <p class="category-description">Papers that explicitly bridge theoretical frameworks with technical implementation</p>
+                <ul id="hybrid-papers-list"></ul>
+            </div>
         </div>
         <div class="section" id="cfps-section">
             <h2>Call for Papers</h2>
@@ -230,62 +270,13 @@
 
     <script>
         const data = {
-            papers: [
-                {
-                    title: "Teaching Models to Balance Resisting and Accepting Persuasion",
-                    authors: "Elias Stengel-Eskin, Peter Hase, Mohit Bansal",
-                    journal: "arXiv",
-                    date: "2024-10-18",
-                    url: "https://arxiv.org/abs/2410.14596"
-                },
-                {
-                    title: "GSM-Symbolic: Understanding the Limitations of Mathematical Reasoning in Large Language Models",
-                    authors: "Iman Mirzadeh, Keivan Alizadeh, Hooman Shahrokhi, Oncel Tuzel, Samy Bengio, Mehrdad Farajtabar",
-                    journal: "Apple Research",
-                    date: "2024-10-07",
-                    url: "https://arxiv.org/abs/2410.05229"
-                },
-                {
-                title: "The Code That Binds Us: Navigating the Appropriateness of Human-AI Assistant Relationships",
-                authors: "Arianna Manzini, Geoff Keeling, Lize Alberts, Shannon Vallor, Meredith Ringel Morris, Iason Gabriel",
-                journal: "Proceedings of the AAAI/ACM Conference on AI, Ethics, and Society",
-                date: "2024-10-16",
-                url: "https://ojs.aaai.org/index.php/AIES/article/view/31694"
-                },
-                {
-                    title: "Scalable watermarking for identifying large language model outputs",
-                    authors: "Sumanth Dathathri, Abigail See, Sumedh Ghaisas, Po-Sen Huang, Rob McAdam, Johannes Welbl, Vandana Bachani, Alex Kaskasoli, Robert Stanforth, Tatiana Matejovicova, Jamie Hayes, Nidhi Vyas, Majd Al Merey, Jonah Brown-Cohen, Rudy Bunel, Borja Balle, Taylan Cemgil, Zahra Ahmed, Kitty Stacpoole, Ilia Shumailov, Ciprian Baetu, Sven Gowal, Demis Hassabis & Pushmeet Kohli ",
-                    journal: "Nature",
-                    date: "2024-10-23",
-                    url: "https://www.nature.com/articles/s41586-024-09696-8"
-                },
+            philosophyPapers: [
                 {
                     title: "Beneficent Intelligence: A Capability Approach to Modeling Benefit, Assistance, and Associated Moral Failures Through AI Systems",
                     authors: "London, A.J., Heidari, H.",
                     journal: "Minds & Machines",
                     date: "2024-09-01",
                     url: "https://doi.org/10.1007/s11023-024-09696-8"
-                },
-                {
-                    title: "Beyond Browsing: API-Based Web Agents",
-                    authors: "Yueqi Song, Frank Xu, Shuyan Zhou, Graham Neubig",
-                    journal: "arXiv",
-                    date: "2024-10-21",
-                    url: "https://arxiv.org/abs/2410.16464"
-                },
-                {
-                    title: "Sabotage Evaluations for Frontier Models",
-                    authors: "Joe Benton, Misha Wagner, Eric Christiansen, Cem Anil, Ethan Perez, Jai Srivastav, Esin Durmus, et al.",
-                    journal: "Anthropic Research",
-                    date: "2024-10-18",
-                    url: "https://www.anthropic.com/research/sabotage-evaluations"
-                },
-                {
-                    title: "Megastudy Testing 25 Treatments to Reduce Antidemocratic Attitudes and Partisan Animosity",
-                    authors: "Jan G. Voelkel et al.",
-                    journal: "Science",
-                    date: "2024-10-20",
-                    url: "https://www.science.org/doi/10.1126/science.adh4764"
                 },
                 {
                     title: "The AI Design Regress",
@@ -314,6 +305,43 @@
                     journal: "Philosophical Studies",
                     date: "2024-09-24",
                     url: "https://link.springer.com/article/10.1007/s11098-024-02226-3"
+                }
+            ],
+            csPapers: [
+                {
+                    title: "Teaching Models to Balance Resisting and Accepting Persuasion",
+                    authors: "Elias Stengel-Eskin, Peter Hase, Mohit Bansal",
+                    journal: "arXiv",
+                    date: "2024-10-18",
+                    url: "https://arxiv.org/abs/2410.14596"
+                },
+                {
+                    title: "GSM-Symbolic: Understanding the Limitations of Mathematical Reasoning in Large Language Models",
+                    authors: "Iman Mirzadeh, Keivan Alizadeh, Hooman Shahrokhi, Oncel Tuzel, Samy Bengio, Mehrdad Farajtabar",
+                    journal: "Apple Research",
+                    date: "2024-10-07",
+                    url: "https://arxiv.org/abs/2410.05229"
+                },
+                {
+                    title: "Scalable watermarking for identifying large language model outputs",
+                    authors: "Sumanth Dathathri, Abigail See, Sumedh Ghaisas, Po-Sen Huang, Rob McAdam, Johannes Welbl, Vandana Bachani, Alex Kaskasoli, Robert Stanforth, Tatiana Matejovicova, Jamie Hayes, Nidhi Vyas, Majd Al Merey, Jonah Brown-Cohen, Rudy Bunel, Borja Balle, Taylan Cemgil, Zahra Ahmed, Kitty Stacpoole, Ilia Shumailov, Ciprian Baetu, Sven Gowal, Demis Hassabis & Pushmeet Kohli ",
+                    journal: "Nature",
+                    date: "2024-10-23",
+                    url: "https://www.nature.com/articles/s41586-024-09696-8"
+                },
+                {
+                    title: "Beyond Browsing: API-Based Web Agents",
+                    authors: "Yueqi Song, Frank Xu, Shuyan Zhou, Graham Neubig",
+                    journal: "arXiv",
+                    date: "2024-10-21",
+                    url: "https://arxiv.org/abs/2410.16464"
+                },
+                {
+                    title: "Sabotage Evaluations for Frontier Models",
+                    authors: "Joe Benton, Misha Wagner, Eric Christiansen, Cem Anil, Ethan Perez, Jai Srivastav, Esin Durmus, et al.",
+                    journal: "Anthropic Research",
+                    date: "2024-10-18",
+                    url: "https://www.anthropic.com/research/sabotage-evaluations"
                 },
                 {
                     title: "Controllable Safety Alignment: Inference-Time Adaptation to Diverse Safety Requirements",
@@ -328,13 +356,6 @@
                     journal: "arXiv",
                     date: "2024-10-17",
                     url: "https://arxiv.org/abs/2410.13691"
-                },
-                {
-                    title: "Moral Alignment for LLM Agents",
-                    authors: "Elizaveta Tennant, Stephen Hailes, Mirco Musolesi",
-                    journal: "arXiv",
-                    date: "2024-10-02",
-                    url: "https://arxiv.org/abs/2410.01639"
                 },
                 {
                     title: "Looking Inward: Language Models Can Learn About Themselves by Introspection",
@@ -365,144 +386,20 @@
                     url: "https://arxiv.org/abs/2410.12877"
                 }
             ],
-            cfps: [
+            hybridPapers: [
                 {
-                    title: "Oxford Berlin Colloquium 2025: AI/Computing and Moral/Political Philosophy",
-                    deadline: "2024-10-15",
-                    url: "https://www.oxford-aiethics.ox.ac.uk/oxford-berlin-colloquium-2025-call-papers"
+                    title: "Moral Alignment for LLM Agents",
+                    authors: "Elizaveta Tennant, Stephen Hailes, Mirco Musolesi",
+                    journal: "arXiv",
+                    date: "2024-10-02",
+                    url: "https://arxiv.org/abs/2410.01639"
                 },
                 {
-                    title: "ACM FAccT 2025 (Athens, Greece)",
-                    deadline: "2025-01-15",
-                    url: "https://facctconference.org/2025/#:~:text=FAccT%202025,welcome%20your%20contributions%20and%20insights."
-                },
-                {
-                    title: "Call for Papers on Social Cognition and Agency",
-                    deadline: "2024-09-24",
-                    url: "https://philevents.org/event/show/126422"
-                },
-                {
-                    title: "TeXne Conference Call for Papers",
-                    deadline: "2024-11-01",
-                    url: "https://philevents.org/event/show/126054"
-                },
-                {
-                    title: "Symposium 2025: Aristotle in the Era of A.I. - Call for Participation",
-                    deadline: "2025-01-07",
-                    url: "http://www.academyofathens.gr/en/aristotle-ai"
-                },
-                {
-                    title: "Second International Symposium on Politics of Technologies in the Digital Age PHILOSOPHICAL AND INTERDISCIPLINARY PERSPECTIVES ON THE DIGITAL TRANSFORMATION OF THE PUBLIC SPHERE",
-                    deadline: "2024-09-15",
-                    url: "https://philevents.org/event/show/122038"
-                },
-                {
-                    title: "2nd Annual National Symposium on Equitable AI",
-                    deadline: "2024-11-15",
-                    url: "https://philevents.org/event/show/127690"
-                },
-                {
-                    title: "TexneCON 2025: Tech Ethics eXchange NorthEast, an Ethics of Technology Conference (including AI)",
-                    deadline: "2024-11-01",
-                    url: "https://philevents.org/event/show/126054"
-                },
-            ],
-            conferences: [
-                {
-                    title: "SRI Seminar Series 2024",
-                    date: "2024-10-18",
-                    location: "University of Toronto",
-                    url: "https://srinstitute.utoronto.ca/news/sri-seminar-series-returns-2024-grosse-abebe-dwork-huq-more",
-                    lat: 43.6629,
-                    lng: -79.3957
-                },
-                {
-                    title: "TeXne Conference",
-                    date: "2025-02-01",
-                    location: "MIT",
-                    url: "https://philevents.org/event/show/126054",
-                    lat: 42.3601,
-                    lng: -71.0942
-                },
-                {
-                    title: "Symposium 2025: Aristotle in the Era of A.I.",
-                    date: "2025-07-10",
-                    location: "Academy of Athens, Greece",
-                    url: "http://www.academyofathens.gr/en/aristotle-ai",
-                    lat: 37.9838,
-                    lng: 23.7275
-                },
-                {
-                    title: "AISoLA, Conference Track Responsible and Trusted AI: An Interdisciplinary Perspective",
-                    date: "2024-10-30 - 2024-11-03",
-                    location: "Aldemar Knossos Royal, Crete, Greece",
-                    url: "https://2024-isola.isola-conference.org/",
-                    lat: 35.3253,
-                    lng: 25.1444
-                },
-                {
-                    title: "AI and Human Dignity",
-                    date: "2024-10-31",
-                    location: "Friedrich-Alexander-University Erlangen-Nürnberg, Germany",
-                    url: "",
-                    lat: 49.5979, // Approximate coordinates for Erlangen
-                    lng: 11.0045
-                },
-                {
-                    title: "TexneCON 2025: Tech Ethics eXchange NorthEast, an Ethics of Technology Conference",
-                    date: "2024-11-01",
-                    location: "Massachusetts Institute of Technology, Cambridge, MA, USA",
-                    url: "https://philevents.org/event/show/126050",
-                    lat: 42.3601,
-                    lng: -71.0942
-                },
-                {
-                    title: "AI and Human Dignity",
-                    date: "2024-11-14",
-                    location: "UNAM, Mexico City, Mexico",
-                    url: "https://philevents.org/event/show/121922",
-                    lat: 19.3262,
-                    lng: -99.1761
-                },
-                {
-                    title: "2nd Annual National Symposium on Equitable AI",
-                    date: "2024-11-15",
-                    location: "Morgan State University, Baltimore, MD, USA",
-                    url: "https://philevents.org/event/show/127686",
-                    lat: 39.3434,
-                    lng: -76.5830
-                },
-                {
-                    title: "AI and the Future of Science",
-                    date: "2024-11-20",
-                    location: "Lingnan University, Hong Kong",
-                    url: "https://philevents.org/event/show/123930",
-                    lat: 22.3363,
-                    lng: 114.1641
-                },
-                {
-                    title: "Second International Symposium on Politics of Technologies in the Digital Age",
-                    date: "2024-11-21",
-                    location: "University of Ioannina, Greece",
-                    url: "https://philevents.org/event/show/122038",
-                    lat: 39.6178,
-                    lng: 20.8508
-                },
-                {
-                    title: "Melanie Mitchell - AI's Challenge of Understanding the World",
-                    date: "2024-11-22",
-                    location: "University of Pittsburgh, PA, USA",
-                    url: "https://philevents.org/event/show/127010",
-                    lat: 40.4444,
-                    lng: -79.9608
-                },
-                {
-                    title: "Artificial Intelligence and the Professions",
-                    date: "2024-12-05",
-                    location: "Online",
-                    url: "https://philevents.org/event/show/125678",
-                    lat: -75, // Online event, no specific location
-                    lng: 0
+                    title: "Megastudy Testing 25 Treatments to Reduce Antidemocratic Attitudes and Partisan Animosity",
+                    authors: "Jan G. Voelkel et al.",
+                    journal: "Science",
+                    date: "2024-10-20",
+                    url: "https://www.science.org/doi/10.1126/science.adh4764"
                 }
             ]
         };
@@ -688,13 +585,13 @@
                 });
         }
 
-        function limitPapers(papers, limit = 20) {
+        function limitPapers(papers, limit = 10) {
             return papers.slice(0, limit);
         }
 
         function updateLists() {
             const sortedPapers = sortByDateDescending(data.papers);
-            const limitedPapers = limitPapers(sortedPapers, 20);
+            const limitedPapers = limitPapers(sortedPapers, 10);
             const sortedCFPs = sortByDateAscending(data.cfps);
             const sortedConferences = sortByDateAscending(data.conferences);
 
