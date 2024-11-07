@@ -902,6 +902,51 @@
             };
             xEvents.init(options);
         });
+
+        // Function to fetch and update CFP and conference data
+        function fetchPhilEventsData() {
+            const apiUrl = 'https://philevents.org/widget/api?storedQuery=103863998';
+            const loadingIndicator = document.getElementById('loading-indicator');
+
+            // Show loading indicator
+            loadingIndicator.style.display = 'block';
+
+            jQuery.getJSON(apiUrl)
+                .done(function(data) {
+                    const cfpsList = document.getElementById('cfps-list');
+                    const conferencesList = document.getElementById('conferences-list');
+
+                    cfpsList.innerHTML = ''; // Clear existing content
+                    conferencesList.innerHTML = ''; // Clear existing content
+
+                    data.events.forEach(event => {
+                        const listItem = `<li>
+                            <strong><a href="${event.url}" target="_blank">${event.title}</a></strong><br>
+                            <span class="date">${event.date}</span>, <span class="location">${event.location}</span>
+                        </li>`;
+
+                        if (event.type === 'cfp') {
+                            cfpsList.innerHTML += listItem;
+                        } else if (event.type === 'conference') {
+                            conferencesList.innerHTML += listItem;
+                        }
+                    });
+                })
+                .fail(function() {
+                    alert('Failed to load events. Please try again later.');
+                })
+                .always(function() {
+                    // Hide loading indicator
+                    loadingIndicator.style.display = 'none';
+                });
+        }
+
+        // Initial fetch
+        fetchPhilEventsData();
+
+        // Set interval to update data twice a week (every 3.5 days)
+        const intervalInMilliseconds = 3.5 * 24 * 60 * 60 * 1000; // 3.5 days in milliseconds
+        setInterval(fetchPhilEventsData, intervalInMilliseconds);
     </script>
 </body>
 </html>
