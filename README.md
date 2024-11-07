@@ -9,6 +9,9 @@
     <script src="https://unpkg.com/three"></script>
     <script src="https://unpkg.com/globe.gl"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://philevents.org/js/xEvents-widget.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://philevents.org/css/xEvents-widget.css" />
     <style>
         :root {
             --primary-color: #3498db;
@@ -223,6 +226,59 @@
             margin-bottom: 15px;
             font-size: 0.9em;
         }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: var(--card-background);
+            margin: 15% auto;
+            padding: 20px;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 700px;
+            position: relative;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        .close-modal {
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: var(--secondary-color);
+        }
+
+        .close-modal:hover {
+            color: var(--primary-color);
+        }
+
+        .modal-title {
+            margin-top: 0;
+            padding-right: 40px;
+            color: var(--primary-color);
+        }
+
+        .modal-metadata {
+            color: var(--secondary-color);
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .modal-abstract {
+            line-height: 1.6;
+        }
     </style>
 </head>
 <body>
@@ -267,6 +323,9 @@
         </div>
     </div>
    
+
+    <!-- PhilEvents Widget -->
+    <div id='xevents-widget103863998'></div>
 
     <script>
         const data = {
@@ -553,6 +612,15 @@
                     url: "https://philevents.org/event/show/125678",
                     lat: -86.0000,
                     lng: 0.0000
+                },
+                {
+                    title: "SPT 2025: The Intimate Technological Revolution",
+                    date: "2025-06-25",
+                    location: "Eindhoven University of Technology, Netherlands",
+                    url: "https://spt2025.org",
+                    lat: 51.4484,
+                    lng: 5.4908,
+                    abstract: "From June 25-28, 2025, the Philosophy and Ethics Group of the Faculty Industrial Engineering & Innovation Sciences of the Eindhoven University of Technology will host the 24th biennial international conference of the Society for Philosophy and Technology. The conference theme is 'The Intimate Technological Revolution', exploring how modern technology permeates every aspect of our lives - from brain implants to social media, big data, and intelligent robots. The conference aims to reflect on societal and ethical issues of these intimate technologies, rethinking ethical frameworks and social practices. The event will be conducted primarily in-person with some hybrid elements including live-streamed keynotes and virtual networking opportunities."
                 }
             ]
         };
@@ -824,6 +892,16 @@
             updateLists();
             updateMonthButtons();
         }, 86400000);
+
+        jQuery.noConflict();
+        jQuery(document).ready(function() {
+            var options = {
+                site: 'https://philevents.org/widget/api',
+                storedQuery: 103863998, // the search query identifier
+                containerTag: "xevents-widget103863998"
+            };
+            xEvents.init(options);
+        });
     </script>
 </body>
 </html>
