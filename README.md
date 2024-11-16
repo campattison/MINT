@@ -384,7 +384,7 @@
                     url: "http://arxiv.org/abs/2411.02432"
                 }
             ],
-            technicalPapers: [
+            csPapers: [
                 {
                     title: "Teaching Models to Balance Resisting and Accepting Persuasion",
                     authors: "Elias Stengel-Eskin, Peter Hase, Mohit Bansal",
@@ -957,8 +957,8 @@
             );
             
             updateList(
-                sortByDateDescending(data.technicalPapers), 
-                'technical-papers-list', 
+                sortByDateDescending(data.csPapers), 
+                'cs-papers-list', 
                 formatPaper
             );
             
