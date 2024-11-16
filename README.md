@@ -364,9 +364,27 @@
                     journal: "Philosophical Studies",
                     date: "2024-09-24",
                     url: "https://link.springer.com/article/10.1007/s11098-024-02226-3"
+                },
+                {
+                    title: "Take Caution in Using LLMs as Human Surrogates",
+                    authors: "Gao et al.",
+                    date: "2024-10-25",
+                    url: "http://arxiv.org/abs/2410.19599"
+                },
+                {
+                    title: "Conscious artificial intelligence and biological naturalism",
+                    authors: "Seth",
+                    date: "2024-06-30",
+                    url: "https://osf.io/tz6an"
+                },
+                {
+                    title: "Can LLMs make trade-offs involving stipulated pain and pleasure states?",
+                    authors: "Keeling et al.",
+                    date: "2024-11-01",
+                    url: "http://arxiv.org/abs/2411.02432"
                 }
             ],
-            csPapers: [
+            technicalPapers: [
                 {
                     title: "Teaching Models to Balance Resisting and Accepting Persuasion",
                     authors: "Elias Stengel-Eskin, Peter Hase, Mohit Bansal",
@@ -443,6 +461,66 @@
                     journal: "arXiv",
                     date: "2024-10-15",
                     url: "https://arxiv.org/abs/2410.12877"
+                },
+                {
+                    title: "Sabotage Evaluations for Frontier Models",
+                    authors: "Benton et al.",
+                    date: "2024-10-20",
+                    url: "https://arxiv.org/abs/2410.13787"
+                },
+                {
+                    title: "Scalable watermarking for identifying large language model outputs",
+                    authors: "Dathathri et al.",
+                    date: "2024-10",
+                    url: "https://www.nature.com/articles/s41586-024-08025-4"
+                },
+                {
+                    title: "How Transformers Solve Propositional Logic Problems",
+                    authors: "Hong et al.",
+                    date: "2024-11-06",
+                    url: "http://arxiv.org/abs/2411.04105"
+                },
+                {
+                    title: "Hunyuan-Large: An Open-Source MoE Model",
+                    authors: "Sun et al.",
+                    date: "2024-11-05",
+                    url: "http://arxiv.org/abs/2411.02265"
+                },
+                {
+                    title: "Samba: Simple Hybrid State Space Models",
+                    authors: "Ren et al.",
+                    date: "2024-06-11",
+                    url: "http://arxiv.org/abs/2406.07522"
+                },
+                {
+                    title: "Autoregressive Large Language Models are Computationally Universal",
+                    authors: "Schuurmans et al.",
+                    date: "2024-10-04",
+                    url: "http://arxiv.org/abs/2410.03170"
+                },
+                {
+                    title: "Persistent Pre-Training Poisoning of LLMs",
+                    authors: "Zhang et al.",
+                    date: "2024-10-17",
+                    url: "http://arxiv.org/abs/2410.13722"
+                },
+                {
+                    title: "Attacking Vision-Language Computer Agents via Pop-ups",
+                    authors: "Zhang et al.",
+                    date: "2024-11-04",
+                    url: "http://arxiv.org/abs/2411.02391"
+                },
+                {
+                    title: "Improving Instruction-Following in Language Models through Activation Steering",
+                    authors: "Stolfo et al.",
+                    date: "2024-10-15",
+                    url: "http://arxiv.org/abs/2410.12877"
+                },
+                {
+                    title: "How Far is Video Generation from World Model",
+                    authors: "Kang et al.",
+                    date: "2024-11-04",
+                    url: "http://arxiv.org/abs/2411.02385"
                 }
             ],
             hybridPapers: [
@@ -459,6 +537,66 @@
                     journal: "Science",
                     date: "2024-10-20",
                     url: "https://www.science.org/doi/10.1126/science.adh4764"
+                },
+                {
+                    title: "Looking Inward: Language Models Can Learn About Themselves by Introspection",
+                    authors: "Binder et al.",
+                    date: "2024-10-17",
+                    url: "http://arxiv.org/abs/2410.13787"
+                },
+                {
+                    title: "Oversight for Frontier AI through a Know-Your-Customer Scheme",
+                    authors: "Egan & Heim",
+                    date: "2023-10-20",
+                    url: "http://arxiv.org/abs/2310.13625"
+                },
+                {
+                    title: "Biased AI can Influence Political Decision-Making",
+                    authors: "Fisher et al.",
+                    date: "2024-11-04",
+                    url: "http://arxiv.org/abs/2410.06415"
+                },
+                {
+                    title: "Safety case template for frontier AI",
+                    authors: "Goemans et al.",
+                    date: "2024-11-12",
+                    url: "http://arxiv.org/abs/2411.08088"
+                },
+                {
+                    title: "Imagining and building wise machines",
+                    authors: "Johnson et al.",
+                    date: "2024-11-04",
+                    url: "http://arxiv.org/abs/2411.02478"
+                },
+                {
+                    title: "Implicit Personalization in Language Models",
+                    authors: "Jin et al.",
+                    date: "2024-10-31",
+                    url: "http://arxiv.org/abs/2405.14808"
+                },
+                {
+                    title: "Targeted Manipulation and Deception",
+                    authors: "Williams et al.",
+                    date: "2024-11-04",
+                    url: "http://arxiv.org/abs/2411.02306"
+                },
+                {
+                    title: "Controllable Safety Alignment",
+                    authors: "Zhang et al.",
+                    date: "2024-10-11",
+                    url: "http://arxiv.org/abs/2410.08968"
+                },
+                {
+                    title: "Teaching Models to Balance Resisting and Accepting Persuasion",
+                    authors: "Stengel-Eskin et al.",
+                    date: "2024-10-18",
+                    url: "http://arxiv.org/abs/2410.14596"
+                },
+                {
+                    title: "How Far is Video Generation from World Model",
+                    authors: "Kang et al.",
+                    date: "2024-11-04",
+                    url: "http://arxiv.org/abs/2411.02385"
                 }
             ],
             cfps: [
@@ -819,8 +957,8 @@
             );
             
             updateList(
-                sortByDateDescending(data.csPapers), 
-                'cs-papers-list', 
+                sortByDateDescending(data.technicalPapers), 
+                'technical-papers-list', 
                 formatPaper
             );
             
